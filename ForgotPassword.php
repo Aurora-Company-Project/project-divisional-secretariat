@@ -30,7 +30,7 @@
 </div>
 </div>
 <div id="footer">
-<h3> Contact Us @ Team Aurora </h3>
+<h4> Contact Us @ Team Aurora </h4>
 <br Email : abc@gmial.com />
 </div>
 </div>

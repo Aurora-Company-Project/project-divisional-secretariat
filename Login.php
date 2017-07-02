@@ -1,3 +1,24 @@
+<?php
+$message='';
+	if(isset($_POST['login'])){
+		require_once('connect_database.php');
+		$uname = $_POST['username'];
+		$pswd = $_POST['pswrd'];
+		$login_query = "SELECT * FROM user_accounts WHERE user_name = '$uname'";
+		$result = database_query($login_query);
+		$user_row = mysqli_fetch_array($result);
+		if ($user_row['pwd']==$pswd){
+			if ($user_row['access_level']=='Admin'){
+				header("Location: AccountAdmin.php");
+			} else{
+				header("Location: AccountOfficer.php");
+			}
+		} else {
+			$message = 'Invalid Username/ Password';
+		}
+	}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,16 +40,17 @@
 </div>
 <div id="Detail">
 <h2 id="DetailHeader"> Enter Your Login Details! </h2>
-<form> 
-<label for="username"> User Name </label> 
-<br/>
+<h3> <?php echo $message ?></h3>
+
+<form action="Login.php" method="post" id="loginForm"> 
+<label for="username"> User Name </label> <br/>
 <input type="text" id="username" name="username" /> <br/>
 <label for="pswrd"> Password </label> <br/>
 <input type="password" id="pswrd" name="pswrd" /> <br/>
-<button> Login </button>
+<button type="submit" form="loginForm" name="login"> Login </button>
 </form>
 
- </div>
+</div>
 </div>
 <div id="footer"></div>
 </div>

@@ -12,7 +12,7 @@
 <div id="NavBar"> 
 	<nav>
 		<ul>
-			<li> <a href="#"> Home </a></li>
+			<li> <a href="AccountOfficer.php"> Home </a></li>
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">

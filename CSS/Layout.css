@@ -30,6 +30,14 @@ body {
 	overflow:auto;
 }
 
+h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#F00;
+	margin-left:65px;
+	font-size:16px;
+}
+	
+
 #PageHeading{
 	margin-top:10px;
 	height:auto;
