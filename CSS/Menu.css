@@ -48,6 +48,7 @@ nav ul li:hover a{
 	display:none;
 	position:absolute;
 	min-width:160px;
+	width:auto;
 	background-color:#CCC;
 	height:auto;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -56,6 +57,8 @@ nav ul li:hover a{
 
 .DropDwnCntnt .DrpLst li {
 	min-width:160px;
+	width:auto;
+	padding-right:10px;
 	color:#009;
 	float:none;
 	text-decoration:none;
@@ -64,7 +67,10 @@ nav ul li:hover a{
 	text-indent:10px;
 	text-align:left;
 	height:40px;
+	line-height:40px;
 }
+
+
 
 
 	

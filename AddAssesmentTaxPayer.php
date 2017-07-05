@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
+<link href="CSS/AddCustomer.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
 <title>Home</title>
 </head>
@@ -15,7 +15,7 @@
 <div id="NavBar"> 
 	<nav>
 		<ul>
-			<li> <a href="AccountAdmin.php"> Home </a></li>
+			<li> <a href="AccountOfficer.php"> Home </a></li>
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
@@ -34,28 +34,11 @@
             </ul>
             </div> 
             </li>
-            <li class="DropDwnElmnt"> <a href="#"> Add Tax Payer</a>
-            <div class="DropDwnCntnt">
-            <ul class="DrpLst">
-            	<li> <a href="#"> Assesment Tax Payer </a> </li>
-                <li> <a href="#"> Shop Tax Payer </a> </li>
-            </ul>
-            </div>
-            </li>
-            <li class="DropDwnElmnt"> <a href="#"> Change Policies </a> 
+            <li class="DropDwnElmnt"> <a href="#"> View Policies </a>
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="#"> Assesment Tax Policies </a> </li>
                 <li> <a href="#"> Shop Rental Policies </a> </li>
-            </ul>
-            </div>
-            </li>
-            <li class="DropDwnElmnt"> <a href="#"> Manage Accounts </a> 
-            <div class="DropDwnCntnt">
-            <ul class="DrpLst">
-            	<li> <a href="#"> Assesment Tax Accounts </a> </li>
-                <li> <a href="#"> Shop Rental Accounts </a> </li>
-                <li> <a href="#"> User Acounts </a> </li>
             </ul>
             </div>
             </li>
@@ -65,13 +48,21 @@
 </div>
 <div id="Content"> 
 <div id="PageHeading">
-<h1>Welcome! <?php echo "$fname " ."$lname" ?> </h1>
+  <h1>Welcome! </h1>
 </div>
 <div id="Message">
-
+<h2> Provide details of the tax payer. </h2>
+<h2> Fill all the data correctly. </h2>
 </div>
 <div id="Detail">
-<h2> </h2>
+<h2 class="DetailHeader2"> Assement tax payer apply form. </h2>
+<form action="DetailConfirmation.php" method="post" id="AssementTaxPayerDetail">
+<table align="left">
+<tr>
+<td  height="35" width="300"></td> 
+</tr>
+</table>
+</form>
 </div>
 </div>
 <div id="footer"></div>

@@ -1,17 +1,29 @@
 <?php
-$message='';
+	session_start();
+	if (empty($_SESSION['error'])){
+		$message ='';
+	} else {
+		$message = $_SESSION['error'];
+	}
 	if(isset($_POST['login'])){
 		require_once('connect_database.php');
 		$uname = $_POST['username'];
 		$pswd = $_POST['pswrd'];
 		$login_query = "SELECT * FROM user_accounts WHERE user_name = '$uname'";
 		$result = database_query($login_query);
-		$user_row = mysqli_fetch_array($result);
-		if ($user_row['pwd']==$pswd){
-			if ($user_row['access_level']=='Admin'){
-				header("Location: AccountAdmin.php");
-			} else{
-				header("Location: AccountOfficer.php");
+		if ((mysqli_num_rows($result)==1)){
+			$user_row = mysqli_fetch_array($result);
+			if ($user_row['pwd']==$pswd){
+				$_SESSION['user_id'] = $user_row['user_id'];
+				$_SESSION['first_name'] = $user_row['first_name'];
+				$_SESSION['last_name'] = $user_row['last_name'];
+				if ($user_row['access_level']=='Admin'){
+					header("Location: AccountAdmin.php? <?php echo SID;?>");
+				} else{
+					header("Location: AccountOfficer.php? <?php echo SID;?>");
+				}
+			} else {
+				$message = 'Invalid Username/ Password';
 			}
 		} else {
 			$message = 'Invalid Username/ Password';
