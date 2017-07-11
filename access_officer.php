@@ -1,0 +1,11 @@
+<?php
+	session_start();
+	require_once("connect_database.php");
+	if (empty($_SESSION['user_id']) || $_SESSION['access_level']!='Officer'){
+		$_SESSION['error'] = 'Please login first!';
+		header("Location: Login.php");
+	}else {
+		$first_name = $_SESSION['first_name'];
+		$last_name = $_SESSION['last_name'];
+	}	
+?>

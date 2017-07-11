@@ -20,7 +20,7 @@
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="AddAssesmentTaxPayer.php? <?php echo SID;?>"> Assesment Tax Payer </a> </li>
-                <li> <a href="#"> Shop Tax Payer </a> </li>
+                <li> <a href="AddShopRentalPayer.php? <?php echo SID;?>"> Shop Tax Payer </a> </li>
             </ul>
             </div>
             </li>

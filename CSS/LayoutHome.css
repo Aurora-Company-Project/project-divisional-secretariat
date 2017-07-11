@@ -25,7 +25,7 @@ body {
 }
 
 #Content {
-	height:700px;
+	min-height:700px;
 	clear:both;
 	overflow:auto;
 }
@@ -64,7 +64,8 @@ h2 {
 #Message {
 	width:300px;
 	float:left;
-	margin-right:10px;
+	border:thin;
+	border-color:#00F;
 }
 
 #Detail {

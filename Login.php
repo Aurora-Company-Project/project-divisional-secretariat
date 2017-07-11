@@ -7,14 +7,15 @@
 	}
 	if(isset($_POST['login'])){
 		require_once('connect_database.php');
-		$uname = $_POST['username'];
+		$user_name = $_POST['username'];
 		$pswd = $_POST['pswrd'];
-		$login_query = "SELECT * FROM user_accounts WHERE user_name = '$uname'";
+		$login_query = "SELECT * FROM user_accounts WHERE user_name = '$user_name'";
 		$result = database_query($login_query);
 		if ((mysqli_num_rows($result)==1)){
 			$user_row = mysqli_fetch_array($result);
 			if ($user_row['pwd']==$pswd){
 				$_SESSION['user_id'] = $user_row['user_id'];
+				$_SESSION['access_level'] = $user_row['access_level'];
 				$_SESSION['first_name'] = $user_row['first_name'];
 				$_SESSION['last_name'] = $user_row['last_name'];
 				if ($user_row['access_level']=='Admin'){

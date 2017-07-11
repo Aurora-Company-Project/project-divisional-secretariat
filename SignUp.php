@@ -2,22 +2,22 @@
 	$message='';
 	require('connect_database.php');
 	if (isset($_POST['submit'])){		
-		$fname = $_POST['firstName'];
-		$lname = $_POST['lastName'];
-		$uname = $_POST['username'];
+		$first_name = $_POST['firstName'];
+		$last_name = $_POST['lastName'];
+		$user_name = $_POST['username'];
 		$email = $_POST['email'];
-		$cnfmemail = $_POST['cnfmemail'];
+		$cnfm_email = $_POST['cnfmemail'];
 		$pswd = $_POST['pswd'];
-		$cnfmpswd = $_POST['cnfmpswd'];
+		$cnfm_pswd = $_POST['cnfmpswd'];
 		$emp_id = $_POST['empID'];
 		$check_query = "SELECT * FROM user_accounts WHERE user_name = '$uname'";
 		$result = database_query($check_query);
-		if (( empty($fname) || empty($lname) || empty($uname) || empty($email) || empty($emp_id)|| empty($pswd))){
+		if (( empty($first_name) || empty($last_name) || empty($user_name) || empty($email) || empty($emp_id)|| empty($pswd))){
 			$message = "Please fill all the fields!";
 		}
 		elseif (!(is_null(mysqli_fetch_array($result)))){
 			$message = "Username already exists";
-			$uname = '';
+			$user_name = '';
 		}
 		elseif ($pswd != $cnfmpswd) {
 			$message = 'Invalid password';
@@ -62,15 +62,15 @@
     <td width="250" height="35"> <label for="lastName"> Last Name </label> </td>
 </tr>
 <tr>
-	<td height="25"> <input type="text" id="firstName" name="firstName" value="<?php if(isset($fname)) echo $fname; ?>"/> </td>
-    <td height="25"> <input type="text" id="lastName" name="lastName" value="<?php if(isset($lname)) echo $lname; ?>"/> </td>
+	<td height="25"> <input type="text" id="firstName" name="firstName" value="<?php if(isset($first_name)) echo $first_name; ?>"/> </td>
+    <td height="25"> <input type="text" id="lastName" name="lastName" value="<?php if(isset($last_name)) echo $last_name; ?>"/> </td>
 </tr>
 <tr>
 	<td width="250" height="35"> <label for="username"> Username </label> </td>
     <td width="250" height="35"> <label for="empID"> Employ ID </label> </td>
 </tr>
 <tr>
-	<td height="25"> <input type="text" id="username" name="username" value="<?php if(isset($uname)) echo $uname; ?>"/> </td>
+	<td height="25"> <input type="text" id="username" name="username" value="<?php if(isset($user_name)) echo $user_name; ?>"/> </td>
 	<td height="25"> <input type="number" id="empID" name="empID" value="<?php if(isset($emp_id)) echo $emp_id; ?>"/> </td>
 </tr>
 <tr>

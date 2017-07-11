@@ -6,9 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
-<link href="CSS/AddTaxPayerForm.css" rel="stylesheet" type="text/css" />
+<link href="CSS/AddRentalPayerForm.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
-<title>Add Assesment Tax Payer</title>
+<title>Add Shop Rental Payer</title>
 </head>
 <body>
 <div id="Holder">
@@ -78,9 +78,9 @@
 <h2> Fill all the data correctly. </h2>
 </div>
 <div id="Detail">
-<h2 class="DetailHeader2"> Assement tax payer apply form. </h2>
+<h2 class="DetailHeader2"> Shop Rental Payer apply form. </h2>
 <h3> <?php //echo $message ?></h3>
-<form action="DetailConfirmation.php" method="post" id="AssementTaxPayerDetail">
+<form action="DetailConfirmation.php" method="post" id="ShopRentalPayerDetail">
 <table align="left" width="">
 <tr>
 <td  height="45" width="150"><label class="AddFormLabel"> Owner's Name </label></td> 
@@ -88,58 +88,24 @@
 <td  height="45" width="250"><input type="text" class="AddFormInput" id="OwnerName" name="owner_name" value=""/></td> 
 </tr>
 <tr>
-<td  height="80" width="150"><label class="AddFormLabel"> Address </label></td> 
+<td  height="80" width="150"><label class="AddFormLabel"> Owner's Address </label></td> 
+<td  height="80" width="20"></td> 
+<td  height="80" width="250"><textarea id="OwnerAddressField" class="AddFormInput" rows="4" cols="35" name="address"></textarea></td> 
+</tr>
+<tr>
+<td  height="80" width="150"><label class="AddFormLabel"> Shop Address </label></td> 
 <td  height="80" width="20"></td> 
 <td  height="80" width="250"><textarea id="addressField" class="AddFormInput" rows="4" cols="35" name="address"></textarea></td> 
 </tr>
 <tr>
-<td  height="45" width="150"><label class="AddFormLabel"> Ward No. </label></td> 
+<td  height="45" width="150"><label class="AddFormLabel"> Shop No. </label></td> 
 <td  height="45" width="20"></td> 
-<td  height="45" width="250"><select>
-							<option value="25"> 25 </option>
-                            <option value="26"> 26 </option>
-                            <option value="27"> 27 </option>
-                            <option value="29"> 29 </option>
-                            <option value="30"> 30 </option>
-                            </select>
-                            </td> 
+<td  height="45" width="250"><input type="text" class="AddFormInput" id="ShopNo" name="assesment_no" /></td> 
 </tr>
 <tr>
-<td  height="45" width="150"><label class="AddFormLabel"> Road </label></td> 
+<td  height="45" width="150"><label class="AddFormLabel"> Tender Value(Rs) </label></td> 
 <td  height="45" width="20"></td> 
-<td  height="45" width="250"><select>
-							<option value="VR">Veyangoda Road </option>
-                            <option value="NR">Negombo Road </option>
-                            <option value="PR">Paaramulla Road </option>
-                            <option value="VLR">Weliyadda Road </option>
-                            <option value="HR">Heendeniya Road </option>
-                            <option value="MR">Mahawela Road </option>
-                            <option value="ER">Eluwapitiya Road </option>
-                            <option value="BOR">Bodhirukkarama Road </option>
-                            <option value="ALR">Aluthgama Road </option>
-                            <option value="VIR">Vigada Road </option>
-                            <option value="MUR">Mudagamuwa Road </option>
-                            <option value="DUR">Station Road </option>
-                            <option value="MRR">Maarapola Road </option>
-                            <option value="MGR">Magalagoda Road </option>
-                            <option value="MDR">Magalagoda Station Road </option>
-							</select> </td> 
-<td  height="45" width="70"><label class="AddFormLabel"> Side </label></td> 
-<td  height="45" width="100"><select>
-							<option value="L"> Left </option>
-                            <option value="R"> Right </option>
-                            </select>
-							</td> 
-</tr>
-<tr>
-<td  height="45" width="150"><label class="AddFormLabel"> Assesment No. </label></td> 
-<td  height="45" width="20"></td> 
-<td  height="45" width="250"><input type="text" class="AddFormInput" id="AssesmentNo" name="assesment_no" /></td> 
-</tr>
-<tr>
-<td  height="45" width="150"><label class="AddFormLabel"> Asset Value </label></td> 
-<td  height="45" width="20"></td> 
-<td  height="45" width="250"><input type="text" class="AddFormInput" id="AssetValue" name="asset_value" /></td> 
+<td  height="45" width="250"><input type="text" class="AddFormInput" id="TenderVal" name="asset_value" /></td> 
 </tr>
 <tr>
 <td  height="80" width="150"><label class="AddFormLabel"> Property Detail </label></td> 
@@ -149,7 +115,7 @@
 <tr>
 <td height="45" width="150"> </td> 
 <td  height="45" width="20"></td> 
-<td height="45" width="250"> <button id="BtnSubmit" form="AssementTaxPayerDetail" type="submit" name="submit"> Submit </button></td>
+<td height="45" width="250"> <button id="BtnSubmit" form="ShopRentalPayerDetail" type="submit" name="submit"> Submit </button></td>
 </tr>
 </table>
 </form>
