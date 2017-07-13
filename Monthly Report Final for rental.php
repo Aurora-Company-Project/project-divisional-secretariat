@@ -123,6 +123,8 @@
 		<td width="216" align="center">Date</td>
         <td width="251" align="center">Bill No</td>
         <td width="209" align="center">Payment (Rs.)</td>
+        <td width="209" align="center">Arrears (Rs.)</td>
+        <td width="209" align="center">Fines (Rs.)</td>
 	  </tr>
         <?php 
 		
@@ -140,14 +142,15 @@
                     	<td align="center"><?php $i=$i+1; echo $i; ?></td>
                         <td align="center"><?php echo $row['id'] ?></td>
                     	<td align="center"><?php echo $row_custom['date'] ?></td>
-                    	<td align="center"><?php echo $row_custom['bill_no'] ?></td>
                     	<td align="right"><?php echo $row_custom['payment']; $amount+=$row_custom['payment']; ?></td>
+                        <td align="center"><?php echo $row_custom['arrears'] ?></td>
+                        <td align="center"><?php echo $row_custom['fines'] ?></td>
                     </tr>
                    
 			<?php } 
 				}
 				if ($bool==false) { ?>
-                	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+                	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                	<?php } ?>
 	</table>	
          <table id="table2" height="50">
