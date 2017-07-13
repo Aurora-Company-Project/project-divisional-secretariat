@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 11, 2017 at 03:19 PM
+-- Generation Time: Jul 13, 2017 at 02:00 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -31,7 +31,10 @@ USE `project_ds`;
 DROP TABLE IF EXISTS `assesment_tax_detail`;
 CREATE TABLE `assesment_tax_detail` (
   `id` varchar(25) NOT NULL,
-  `assesment_no` int(11) NOT NULL,
+  `ward_no` int(2) NOT NULL,
+  `lane` varchar(4) DEFAULT NULL,
+  `side` varchar(1) NOT NULL,
+  `assesment_no` int(2) NOT NULL,
   `owner_name` varchar(150) NOT NULL,
   `address` varchar(250) NOT NULL,
   `property_detail` varchar(300) DEFAULT NULL,
