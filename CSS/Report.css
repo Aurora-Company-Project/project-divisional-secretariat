@@ -1,0 +1,77 @@
+@charset "utf-8";
+/* CSS Document */
+
+#Headline1 h1{
+	text-align: center;
+	color: #000;
+	}
+#Headline1{
+	text-align:center;
+	background-color: #33F;
+	vertical-align:central;
+}
+
+div.information{
+	position: relative;
+    left: 250px;
+	width:300px;
+	height:100px;
+	top:50px;
+}
+#btn {
+	position:relative;
+	top:30px;
+	width:100px;
+	left:130px;
+	}
+div.table1{
+	height:auto;
+	position:relative;
+	top:30px;
+	left:50px;
+	}
+#tb{
+	position: relative;
+	top: 100px;
+	left: 200px;
+	height: auto;
+	width: 800px;
+	}
+#tb td{
+	height:25px;}
+
+#table2{
+	position:relative;
+	left:200px;
+	top:150px;
+}
+#detail{
+	position:relative;
+	left:300px;
+	top:200px;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 6px;
+}
+#save{margin-bottom:100px;;}
+
+.table_header{
+	width:600px;
+	position:relative;
+	top:100px;
+	left:350px;
+	text-align:center
+	}
+.table_header p{
+	font-size:50px;
+	font-weight:100;
+	}
+
+#hyperlink{
+	
+	position:relative;
+	float:right;
+	right:50px;
+	top:100px;
+	}
+
