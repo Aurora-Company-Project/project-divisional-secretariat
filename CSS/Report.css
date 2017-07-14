@@ -38,7 +38,30 @@ div.table1{
 	width: 800px;
 	}
 #tb td{
-	height:25px;}
+	height:25px;
+	}
+#custom_details{
+	position:relative;
+	left:300px;
+	top:70px;
+	width:250px;
+}
+
+#custom_details1{
+	position:relative;
+	left:300px;
+	top:70px;
+	width:500px;
+}
+
+#message{
+	width:300px;
+	position:static;
+	left:300px;
+	bottom:180px;
+	color:#F00
+}
+
 
 #table2{
 	position:relative;
