@@ -47,7 +47,7 @@
             </ul>
             </div> 
             </li>
-            <li class="DropDwnElmnt"> <a href="#"> View Policies </a></li>
+            <li class="DropDwnElmnt"> <a href="ViewPolicies.php"> View Policies </a></li>
            	<li class="DropDwnElmnt"> <a href="#"> Account </a> 
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
