@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2017 at 02:00 PM
+-- Generation Time: Jul 15, 2017 at 04:58 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_ds`
 --
-CREATE DATABASE IF NOT EXISTS `project_ds` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `project_ds`;
 
 -- --------------------------------------------------------
 
@@ -28,7 +26,6 @@ USE `project_ds`;
 -- Table structure for table `assesment_tax_detail`
 --
 
-DROP TABLE IF EXISTS `assesment_tax_detail`;
 CREATE TABLE `assesment_tax_detail` (
   `id` varchar(25) NOT NULL,
   `ward_no` int(2) NOT NULL,
@@ -47,10 +44,34 @@ CREATE TABLE `assesment_tax_detail` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `policies`
+--
+
+CREATE TABLE `policies` (
+  `id` int(11) NOT NULL,
+  `secretary_of_the_pradeshiya_saba` varchar(45) NOT NULL,
+  `gazette_no` varchar(45) NOT NULL,
+  `gazette_date` date NOT NULL,
+  `assesment_tax_rate` varchar(45) NOT NULL,
+  `discount_for_full_annual_payment` varchar(45) NOT NULL,
+  `discount_for_full_quater_payment` varchar(45) NOT NULL,
+  `shop_rental_fine_rate` varchar(45) NOT NULL,
+  `year` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `policies`
+--
+
+INSERT INTO `policies` (`id`, `secretary_of_the_pradeshiya_saba`, `gazette_no`, `gazette_date`, `assesment_tax_rate`, `discount_for_full_annual_payment`, `discount_for_full_quater_payment`, `shop_rental_fine_rate`, `year`) VALUES
+(1, 'K.A Upul Ranjith', '453/6', '1987-05-12', '7%', '10%', '5%', '10%', 10);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `shop_rental_detail`
 --
 
-DROP TABLE IF EXISTS `shop_rental_detail`;
 CREATE TABLE `shop_rental_detail` (
   `id` int(2) NOT NULL,
   `owner_name` varchar(100) NOT NULL,
@@ -68,7 +89,6 @@ CREATE TABLE `shop_rental_detail` (
 -- Table structure for table `user_accounts`
 --
 
-DROP TABLE IF EXISTS `user_accounts`;
 CREATE TABLE `user_accounts` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(100) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
@@ -102,6 +122,12 @@ INSERT INTO `user_accounts` (`user_id`, `user_name`, `first_name`, `last_name`, 
 ALTER TABLE `assesment_tax_detail`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `address` (`address`);
+
+--
+-- Indexes for table `policies`
+--
+ALTER TABLE `policies`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `shop_rental_detail`
