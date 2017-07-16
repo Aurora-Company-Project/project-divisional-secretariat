@@ -11,11 +11,7 @@
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<script type="text/jscript">
-	function getalert(){
-		alert('Please select the month');
-		}
-</script>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
@@ -89,7 +85,7 @@
     <h1>Rental Tax Payer</h1>
     <h1>Monthly Report</h1>
 </div>
-<div class="information">
+<div id='getter' class="information">
     <form action="" method="post">
             Select Month :
         <select name="month">
@@ -162,14 +158,27 @@
             </tr>
          </table>
        
-     
-   
-   <button id="detail" type="button">Save</button>
-  <div id="hyperlink" > <a href="#" target="_blank" onclick="window.open('Monthly Report.php').print() " type="button">Print Report</a> </div>
+    <button id="detail" type="button" onclick="myFunction()" target="">Print View</button>
+  
   <?php } ?>
 
 
 </div>
+<script>
+function myFunction() {
+	var blocks=['getter','detail','NavBar']
+   	for (y=0; y < blocks.length; y++){
+        var x = document.getElementById(blocks[y]);
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+    window.open('Monthly Report Final for rental.php');
+    window.print() 
+}
+</script>
 <div id="footer"></div>
 </div>
 </body>

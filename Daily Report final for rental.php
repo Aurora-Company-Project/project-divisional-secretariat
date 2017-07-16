@@ -87,7 +87,7 @@
     <h1>Rental Tax Payer</h1>
     <h1>Daily Report</h1>
   </div>
-  <div class="information">
+  <div id="getter" class="information">
     <form action="" method="post" >
       <label>Select Date : </label>
       <input id="select_date" name="select_date" type="date" value="<?php if(isset($date)) echo $date; ?>" required="required" />
@@ -136,13 +136,27 @@
      
     </tr>
   </table>
-    <button id="detail" type="button">Save</button>
-  <div id="hyperlink" > <a href="#" target="_blank" onclick="window.open('Monthly Report.php').print() " type="button">Print Report</a> </div>
+     <button id="detail" type="button" onclick="myFunction()" target="">Print View</button>
   <?php } ?>
-
-
-
 </div>
+
+<script>
+function myFunction() {
+	var blocks=['getter','detail','NavBar']
+   	for (y=0; y < blocks.length; y++){
+        var x = document.getElementById(blocks[y]);
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+	window.open('Daily Report final for rental.php');
+	window.print();
+	
+}
+</script>
+
 <div id="footer"></div>
 </div>
 </body>
