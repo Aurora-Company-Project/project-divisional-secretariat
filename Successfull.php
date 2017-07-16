@@ -76,14 +76,7 @@
 </div>
 <div id="Content"> 
 <div id="PageHeading">
-<h1>Welcome! <?php echo "$first_name " ."$last_name" ?> </h1>
-</div>
-<div id="Message">
-
-</div>
-<div id="Detail">
-<h2> </h2>
-</div>
+<h1>Account Created Succesfully!</h1>
 </div>
 <div id="footer"></div>
 </div>

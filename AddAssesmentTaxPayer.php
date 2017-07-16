@@ -4,34 +4,43 @@
 ?>
 
 <?php
-	$owner_name="";
-	$address="";
-	$assesment_no="";
-	$asset_value="";
-	$property_detail="";
 	$message="";
 	$confirmation="";
 	if (isset($_POST['cancel'])){
 		$confirmation='0';
 	}
 	if (isset($_POST['confirm'])){
-		$query ="";
+		$owner_name=$_POST['owner_name'];
+		$address=$_POST['address'];
+		$assesment_no=$_POST['assesment_no'];
+		$asset_value=$_POST['asset_value'];
+		$property_detail=$_POST['property_detail'];
+		$ward_no = $_POST['ward_no'];
+		$lane = $_POST['lane'];
+		$side = $_POST['side'];
+		$policy_query = "SELECT assesment_tax_rate FROM policies WHERE id=1";
+		$result = mysqli_fetch_array(database_query($policy_query));
+		$rate = $result['assesment_tax_rate']/100;
+		$annual_tax = $asset_value * $rate;
+		$id = $ward_no.$lane.$side.$assesment_no;
+		$query ="INSERT INTO assesment_tax_detail (id, ward_no, lane, side, assesment_no, owner_name, ".
+				"address, property_detail, asset_value, annual_tax) " . "VALUES ('$id', $ward_no, ".
+				"'$lane', '$side', $assesment_no, '$owner_name', '$address', '$property_detail', $asset_value, $annual_tax)";
+		database_query($query);
+		header('Location: Sucessfull.php');
 	}else if (isset($_POST['submit'])) {
 		if (is_numeric($_POST['assesment_no']) && is_numeric($_POST['asset_value'])){
 			if (($_POST['ward_no']!='') && ($_POST['lane']!='') && ($_POST['side']!='')){
-				$owner_name=$_POST['owner_name'];
-				$address=$_POST['address'];
-				$assesment_no=$_POST['assesment_no'];
-				$asset_value=$_POST['asset_value'];
-				$property_detail=$_POST['property_detail'];
 				$ward_no = $_POST['ward_no'];
 				$lane = $_POST['lane'];
 				$side = $_POST['side'];
+				$assesment_no=$_POST['assesment_no'];
 				$id = $ward_no.$lane.$side.$assesment_no;
 				$check_query = "SELECT * FROM assesment_tax_detail WHERE id = '$id'";
 				$result=database_query($check_query);
 				if ((is_null(mysqli_fetch_array($result)))) {
 					$confirmation='1';
+					$message='Confirm details to proceed. Press cancel to make changes.';
 				} else {
 					$message="Assesment tax account already exists";
 					unset($_POST['submit']);
@@ -64,7 +73,7 @@
 	<nav>
 		<ul>
 			<li> <a href="AccountAdmin.php"> Home </a></li>
-			<li class="DropDwnElmnt"> <a href="#"> Add Tax Payer</a>
+            <li class="DropDwnElmnt"> <a href="#"> Add Tax Payer</a>
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="AddAssesmentTaxPayer.php? <?php echo SID;?>"> Assesment Tax Payer </a> </li>
@@ -72,7 +81,7 @@
             </ul>
             </div>
             </li>
-            <li class="DropDwnElmnt"> <a href="#"> Reports </a>  
+			<li class="DropDwnElmnt"> <a href="#"> Reports </a>  
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li class="DropDwnElmnt"> <a href="#"> Assesment Tax <span> </span></a> 
@@ -95,13 +104,19 @@
             </ul>
             </div> 
             </li>
-            <li class="DropDwnElmnt"> <a href="#"> Change Policies </a></li>
+            <li class="DropDwnElmnt"> <a href="#"> Policies </a></li>
+            <div class="DropDwnCntnt">
+                <ul class="DrpLst">
+                    <li><a href="ViewPolicies.php? <?php echo SID;?>">View Policies</li>
+                    <li><a href="UpdatePolicies.php? <?php echo SID;?>">Update Policies</li>
+                </ul>
+            </div>
+            </li>
             <li class="DropDwnElmnt"> <a href="#"> Manage Accounts </a> 
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="#"> Assesment Tax Accounts </a> </li>
                 <li> <a href="#"> Shop Rental Accounts </a> </li>
-                <li> <a href="#"> User Acounts </a> </li>
             </ul>
             </div>
             </li>
@@ -109,7 +124,7 @@
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="#"> Edit Account </a> </li>
-                <li> <a href="LogOut.php? <?php echo SID;?>"> Logout </a> </li>
+                <li> <a href="#"> Logout </a> </li>
             </ul>
             </div>
             </li>
@@ -141,42 +156,64 @@
 <tr>
 <td  height="45" width="150"><label class="AddFormLabel"> Ward No. </label></td> 
 <td  height="45" width="20"></td> 
-<td  height="45" width="250"><select name="ward_no" <?php if($confirmation=='1'){ echo 'disabled=\"disabled\"'; } ?>>
+<td  height="45" width="250"><select name="ward_no">
 							<option value=""> ... </option>
-							<option value="25" <?php if(isset($_POST['ward_no']) && $_POST['ward_no']=='25') { echo "selected=\"selected\"";} ?>> 25 </option>
-                            <option value="26" <?php if(isset($_POST['ward_no']) && $_POST['ward_no']=='26') { echo "selected=\"selected\"";} ?>> 26 </option>
-                            <option value="27" <?php if(isset($_POST['ward_no']) && $_POST['ward_no']=='27') { echo "selected=\"selected\"";} ?>> 27 </option>
-                            <option value="29" <?php if(isset($_POST['ward_no']) && $_POST['ward_no']=='29') { echo "selected=\"selected\"";} ?>> 29 </option>
-                            <option value="30" <?php if(isset($_POST['ward_no']) && $_POST['ward_no']=='30') { echo "selected=\"selected\"";} ?>> 30 </option>
+							<option value="25" <?php if(isset($_POST['ward_no'])) if($_POST['ward_no']!='25') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>> 25 </option>
+                            <option value="26" <?php if(isset($_POST['ward_no'])) if(isset($_POST['ward_no']) && $_POST['ward_no']!='26') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>> 26 </option>
+                            <option value="27" <?php if(isset($_POST['ward_no'])) if($_POST['ward_no']!='27') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>> 27 </option>
+                            <option value="29" <?php if(isset($_POST['ward_no'])) if($_POST['ward_no']!='29') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>> 29 </option>
+                            <option value="30" <?php if(isset($_POST['ward_no'])) if($_POST['ward_no']!='30') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>> 30 </option>
                             </select>
                             </td> 
 </tr>
 <tr>
 <td  height="45" width="150"><label class="AddFormLabel"> Road </label></td> 
 <td  height="45" width="20"></td> 
-<td  height="45" width="250"><select name="lane" <?php if($confirmation=='1'){ echo 'disabled=\"disabled\"'; } ?>>
+<td  height="45" width="250"><select name="lane">
 							<option value=""> ... </option>
-							<option value="VR" <?php if(isset($_POST['lane']) && $_POST['lane']=='VR') { echo "selected=\"selected\"";} ?>>Veyangoda Road </option>
-                            <option value="NR" <?php if(isset($_POST['lane']) && $_POST['lane']=='NR') { echo "selected=\"selected\"";} ?>>Negombo Road </option>
-                            <option value="PR" <?php if(isset($_POST['lane']) && $_POST['lane']=='PR') { echo "selected=\"selected\"";} ?>>Paaramulla Road </option>
-                            <option value="VLR" <?php if(isset($_POST['lane']) && $_POST['lane']=='VLR') { echo "selected=\"selected\"";} ?>>Weliyadda Road </option>
-                            <option value="HR" <?php if(isset($_POST['lane']) && $_POST['lane']=='HR') { echo "selected=\"selected\"";} ?>>Heendeniya Road </option>
-                            <option value="MR" <?php if(isset($_POST['lane']) && $_POST['lane']=='MR') { echo "selected=\"selected\"";} ?>>Mahawela Road </option>
-                            <option value="ER" <?php if(isset($_POST['lane']) && $_POST['lane']=='ER') { echo "selected=\"selected\"";} ?>>Eluwapitiya Road </option>
-                            <option value="BOR" <?php if(isset($_POST['lane']) && $_POST['lane']=='BOR') { echo "selected=\"selected\"";} ?>>Bodhirukkarama Road </option>
-                            <option value="ALR" <?php if(isset($_POST['lane']) && $_POST['lane']=='ALR') { echo "selected=\"selected\"";} ?>>Aluthgama Road </option>
-                            <option value="VIR" <?php if(isset($_POST['lane']) && $_POST['lane']=='VIR') { echo "selected=\"selected\"";} ?>>Vigada Road </option>
-                            <option value="MUR" <?php if(isset($_POST['lane']) && $_POST['lane']=='MUR') { echo "selected=\"selected\"";} ?>>Mudagamuwa Road </option>
-                            <option value="DUR" <?php if(isset($_POST['lane']) && $_POST['lane']=='DUR') { echo "selected=\"selected\"";} ?>>Station Road </option>
-                            <option value="MRR" <?php if(isset($_POST['lane']) && $_POST['lane']=='MRR') { echo "selected=\"selected\"";} ?>>Maarapola Road </option>
-                            <option value="MGR" <?php if(isset($_POST['lane']) && $_POST['lane']=='MGR') { echo "selected=\"selected\"";} ?>>Magalagoda Road </option>
-                            <option value="MDR" <?php if(isset($_POST['lane']) && $_POST['lane']=='MDR') { echo "selected=\"selected\"";} ?>>Magalagoda Station Road </option>
+							<option value="VR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='VR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Veyangoda Road </option>
+                            <option value="NR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='NR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Negombo Road </option>
+                            <option value="PR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='PR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Paaramulla Road </option>
+                            <option value="VLR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='VLR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Weliyadda Road </option>
+                            <option value="HR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='HR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Heendeniya Road </option>
+                            <option value="MR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='MR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Mahawela Road </option>
+                            <option value="ER" <?php if(isset($_POST['lane'])) if($_POST['lane']!='ER') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Eluwapitiya Road </option>
+                            <option value="BOR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='BOR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Bodhirukkarama Road </option>
+                            <option value="ALR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='ALR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Aluthgama Road </option>
+                            <option value="VIR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='VIR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Vigada Road </option>
+                            <option value="MUR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='MUR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Mudagamuwa Road </option>
+                            <option value="DUR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='DUR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Station Road </option>
+                            <option value="MRR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='MRR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Maarapola Road </option>
+                            <option value="MGR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='MGR') {if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Magalagoda Road </option>
+                            <option value="MDR" <?php if(isset($_POST['lane'])) if($_POST['lane']!='MDR') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>>Magalagoda Station Road </option>
 							</select> </td> 
 <td  height="45" width="70"><label class="AddFormLabel"> Side </label></td> 
-<td  height="45" width="100"><select name="side" <?php if($confirmation=='1'){ echo 'disabled=\"disabled\"'; } ?>>
+<td  height="45" width="100"><select name="side">
 							<option value=""> ... </option>
-							<option value="L" <?php if(isset($_POST['side']) && $_POST['side']=='L') { echo "selected=\"selected\"";} ?>> Left </option>
-                            <option value="R" <?php if(isset($_POST['side']) && $_POST['side']=='R') { echo "selected=\"selected\"";} ?>> Right </option>
+							<option value="L" <?php if(isset($_POST['side'])) if($_POST['side']!='L') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>> Left </option>
+                            <option value="R" <?php if(isset($_POST['side'])) if($_POST['side']!='R') { if ($confirmation=='1') echo "disabled=\"disabled\"";}
+												else { echo "selected=\"selected\"";} ?>> Right </option>
                             </select>
 							</td> 
 </tr>
