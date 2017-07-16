@@ -1,5 +1,5 @@
 <?php
-	require_once("access_officer.php");
+	require_once("access_admin.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,14 +15,14 @@
 <div id="NavBar"> 
 	<nav>
 		<ul>
-			<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Home </a></li>
-			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
-            	<div class="DropDwnCntnt">
-                <ul class="DrpLst">
-            		<li> <a href="#"> Assesment Tax </a> </li>
-                	<li> <a href="#"> Shop Tax </a> </li>
-                </ul>
-                </div>
+			<li> <a href="AccountAdmin.php"> Home </a></li>
+            <li class="DropDwnElmnt"> <a href="#"> Add Tax Payer</a>
+            <div class="DropDwnCntnt">
+            <ul class="DrpLst">
+            	<li> <a href="AddAssesmentTaxPayer.php? <?php echo SID;?>"> Assesment Tax Payer </a> </li>
+                <li> <a href="AddShopRentalPayer.php? <?php echo SID;?>"> Shop Tax Payer </a> </li>
+            </ul>
+            </div>
             </li>
 			<li class="DropDwnElmnt"> <a href="#"> Reports </a>  
             <div class="DropDwnCntnt">
@@ -47,8 +47,23 @@
             </ul>
             </div> 
             </li>
-            <li class="DropDwnElmnt"> <a href="ViewPolicies.php? <?php echo SID; ?>"> View Policies </a></li>
-           	<li class="DropDwnElmnt"> <a href="#"> Account </a> 
+            <li class="DropDwnElmnt"> <a href="#"> Policies </a></li>
+            <div class="DropDwnCntnt">
+                <ul class="DrpLst">
+                    <li><a href="ViewPolicies.php? <?php echo SID;?>">View Policies</li>
+                    <li><a href="UpdatePolicies.php? <?php echo SID;?>">Update Policies</li>
+                </ul>
+            </div>
+            </li>
+            <li class="DropDwnElmnt"> <a href="#"> Manage Accounts </a> 
+            <div class="DropDwnCntnt">
+            <ul class="DrpLst">
+            	<li> <a href="#"> Assesment Tax Accounts </a> </li>
+                <li> <a href="#"> Shop Rental Accounts </a> </li>
+            </ul>
+            </div>
+            </li>
+            <li class="DropDwnElmnt"> <a href="#"> Account </a> 
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="#"> Edit Account </a> </li>
@@ -61,14 +76,7 @@
 </div>
 <div id="Content"> 
 <div id="PageHeading">
-<h1>Welcome! <?php echo "$first_name " ."$last_name" ?> </h1>
-</div>
-<div id="Message">
-
-</div>
-<div id="Detail">
-<h2> </h2>
-</div>
+<h1>Account Created Succesfully!</h1>
 </div>
 <div id="footer"></div>
 </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2017 at 02:00 PM
+-- Generation Time: Jul 16, 2017 at 09:05 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_ds`
 --
-CREATE DATABASE IF NOT EXISTS `project_ds` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `project_ds` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `project_ds`;
 
 -- --------------------------------------------------------
@@ -43,6 +43,42 @@ CREATE TABLE `assesment_tax_detail` (
   `arrears` double NOT NULL DEFAULT '0',
   `current_bal` double DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assesment_tax_detail`
+--
+
+INSERT INTO `assesment_tax_detail` (`id`, `ward_no`, `lane`, `side`, `assesment_no`, `owner_name`, `address`, `property_detail`, `asset_value`, `annual_tax`, `arrears`, `current_bal`) VALUES
+('28MURL6', 28, 'MUR', 'R', 6, 'ryuty', 'hj', 'tj', 56, 1, 56, 2),
+('26NR3', 26, 'NR', 'R', 3, 'hhgfh', 'gfdgfh', 'ghg', 2356, 1, 23, 5),
+('27NRL8', 27, 'NR', 'L', 8, 'hggfh', 'gfh', 'ghjj', 10, 1, 78, 6),
+('25VRL10', 25, 'VR', 'R', 10, 'nb', 'fdh', 'dfbhg', 100, 1, 12, 78);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `policies`
+--
+
+DROP TABLE IF EXISTS `policies`;
+CREATE TABLE `policies` (
+  `id` int(2) NOT NULL,
+  `secretary_of_the_pradeshiya_saba` varchar(45) NOT NULL,
+  `gazette_no` varchar(45) NOT NULL,
+  `gazette_date` date NOT NULL,
+  `assesment_tax_rate` float NOT NULL,
+  `discount_for_full_annual_payment` float NOT NULL,
+  `discount_for_full_quater_payment` float NOT NULL,
+  `shop_rental_fine_rate` float NOT NULL,
+  `year` int(4) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `policies`
+--
+
+INSERT INTO `policies` (`id`, `secretary_of_the_pradeshiya_saba`, `gazette_no`, `gazette_date`, `assesment_tax_rate`, `discount_for_full_annual_payment`, `discount_for_full_quater_payment`, `shop_rental_fine_rate`, `year`) VALUES
+(1, 'K.A Upul Ranjith', '453/6', '1987-05-12', 1, 2, 4, 7, 10);
 
 -- --------------------------------------------------------
 
@@ -102,6 +138,12 @@ INSERT INTO `user_accounts` (`user_id`, `user_name`, `first_name`, `last_name`, 
 ALTER TABLE `assesment_tax_detail`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `address` (`address`);
+
+--
+-- Indexes for table `policies`
+--
+ALTER TABLE `policies`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `shop_rental_detail`

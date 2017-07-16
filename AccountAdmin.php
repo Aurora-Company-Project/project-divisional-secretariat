@@ -47,13 +47,19 @@
             </ul>
             </div> 
             </li>
-            <li class="DropDwnElmnt"> <a href="#"> Change Policies </a></li>
+            <li class="DropDwnElmnt"> <a href="#"> Policies </a></li>
+            <div class="DropDwnCntnt">
+                <ul class="DrpLst">
+                    <li><a href="ViewPolicies.php? <?php echo SID;?>">View Policies</li>
+                    <li><a href="UpdatePolicies.php? <?php echo SID;?>">Update Policies</li>
+                </ul>
+            </div>
+            </li>
             <li class="DropDwnElmnt"> <a href="#"> Manage Accounts </a> 
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="#"> Assesment Tax Accounts </a> </li>
                 <li> <a href="#"> Shop Rental Accounts </a> </li>
-                <li> <a href="#"> User Acounts </a> </li>
             </ul>
             </div>
             </li>
