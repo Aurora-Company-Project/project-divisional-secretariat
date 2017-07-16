@@ -50,8 +50,8 @@
             <li class="DropDwnElmnt"> <a href="#"> Policies </a></li>
             <div class="DropDwnCntnt">
                 <ul class="DrpLst">
-                    <li><a href="ViewPolicies.php">View Policies</li>
-                    <li><a href="UpdatePolicies.php">Update Policies</li>
+                    <li><a href="ViewPolicies.php? <?php echo SID;?>">View Policies</li>
+                    <li><a href="UpdatePolicies.php? <?php echo SID;?>">Update Policies</li>
                 </ul>
             </div>
             </li>
