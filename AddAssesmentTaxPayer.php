@@ -27,7 +27,9 @@
 				"address, property_detail, asset_value, annual_tax) " . "VALUES ('$id', $ward_no, ".
 				"'$lane', '$side', $assesment_no, '$owner_name', '$address', '$property_detail', $asset_value, $annual_tax)";
 		database_query($query);
-		header('Location: Sucessfull.php');
+		$user_table = "CREATE TABLE $id (bill_no INT NOT NULL, date DATETIME NOT NULL, payment DOUBLE NOT NULL, PRIMARY KEY(bill_no))";
+		database_query($user_table);
+		header('Location: Successfull.php');
 	}else if (isset($_POST['submit'])) {
 		if (is_numeric($_POST['assesment_no']) && is_numeric($_POST['asset_value'])){
 			if (($_POST['ward_no']!='') && ($_POST['lane']!='') && ($_POST['side']!='')){
@@ -72,7 +74,7 @@
 <div id="NavBar"> 
 	<nav>
 		<ul>
-			<li> <a href="AccountAdmin.php"> Home </a></li>
+			<li> <a href="AccountAdmin.php? <?php echo SID;?>"> Home </a></li>
             <li class="DropDwnElmnt"> <a href="#"> Add Tax Payer</a>
             <div class="DropDwnCntnt">
             <ul class="DrpLst">

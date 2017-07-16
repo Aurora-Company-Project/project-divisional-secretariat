@@ -19,7 +19,10 @@
 				 " monthly_rental) " . "VALUES ($shop_no, '$owner_name', '$owner_address', ". 
 				 "'$shop_address', $tender_value, $monthly_rental)";
 		database_query($query);
-		header('Location: Sucessfull.php');
+		$shop_name = 'SHP'."$shop_no";
+		$user_table = "CREATE TABLE $shop_name (bill_no INT NOT NULL, date DATETIME NOT NULL, payment DOUBLE NOT NULL, PRIMARY KEY(bill_no))";
+		database_query($user_table);
+		header('Location: Successfull.php');
 	}else if (isset($_POST['submit'])) {
 		if (is_numeric($_POST['shop_no']) && is_numeric($_POST['tender_value']) && is_numeric($_POST['monthly_rental'])){
 			$shop_no = $_POST['shop_no'];
@@ -27,6 +30,7 @@
 			$result=database_query($check_query);
 			if ((is_null(mysqli_fetch_array($result)))) {
 					$confirmation='1';
+					$message='Confirm details to proceed. Press cancel to make changes.';
 			} else {
 				$message="Shop rental payer account already exists";
 				unset($_POST['submit']);
