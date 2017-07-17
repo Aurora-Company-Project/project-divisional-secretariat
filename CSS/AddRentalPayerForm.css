@@ -26,6 +26,10 @@ select {
 	width:130px;
 }
 
+#MonthlyRental {
+	width:130px;
+}
+
 #BtnSubmit {
 	font-size:16px;
 	margin-left:75px;
@@ -38,7 +42,44 @@ select {
 	height:30px;
 }
 	
+#BtnCancel {
+	font-size:16px;
+	margin-left:140px;
+	text-align:center;
+	width:80px;
+	position:absolute;
+	border-radius:4px;
+	background-color:#009;
+	color:#FFF;
+	line-height:25px;
+	height:30px;
+}
+
+#BtnConfirm {
+	font-size:16px;
+	margin-left:20px;
+	text-align:center;
+	width:80px;
+	position:absolute;
+	border-radius:4px;
+	background-color:#009;
+	color:#FFF;
+	line-height:25px;
+	height:30px;
+}
+
+	
 #BtnSubmit:hover {
+	background-color:#999;
+	color:#009;
+}
+
+#BtnCancel:hover {
+	background-color:#999;
+	color:#009;
+}
+
+#BtnConfirm:hover {
 	background-color:#999;
 	color:#009;
 }
