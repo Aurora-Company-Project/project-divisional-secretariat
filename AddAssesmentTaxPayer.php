@@ -133,13 +133,15 @@
 		</ul>
 	</nav>
 </div>
-<div id="Content"> 
+<div id="Content">
+<div id="PageHeading">
+<h1>Assement Tax Payer apply form</h1>
+</div> 
 <div id="Message" >
 <h2> Provide details of the tax payer. </h2>
 <h2> Fill all the data correctly. </h2>
 </div>
 <div id="Detail">
-<h2 class="DetailHeader2"> Assement tax payer apply form. </h2>
 <h3> <?php echo $message ?></h3>
 <form action="AddAssesmentTaxPayer.php" method="post" id="AssementTaxPayerDetail">
 <table align="left" width="">

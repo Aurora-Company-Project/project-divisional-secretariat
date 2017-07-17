@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	require_once("connect_database.php");
 	if (empty($_SESSION['user_id']) || $_SESSION['access_level']!='Admin'){
 		$_SESSION['error'] = 'Please login first';
 		header("Location: Login.php");

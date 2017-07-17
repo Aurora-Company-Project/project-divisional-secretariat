@@ -118,14 +118,13 @@
 </div>
 <div id="Content"> 
 <div id="PageHeading">
-<h1>Welcome! <?php echo "$first_name " ."$last_name" ?> </h1>
+<h1>Shop Rental Payer apply form</h1>
 </div>
 <div id="Message" >
 <h2> Provide details of the tax payer. </h2>
 <h2> Fill all the data correctly. </h2>
 </div>
 <div id="Detail">
-<h2 class="DetailHeader2"> Shop Rental Payer apply form. </h2>
 <h3> <?php echo $message ?></h3>
 <form action="AddShopRentalPayer.php" method="post" id="ShopRentalPayerDetail" name="ShopRentalPayerDetail">
 <table align="left" width="">
@@ -162,7 +161,7 @@
 <tr>
 <td  height="45" width="200"><label class="AddFormLabel"> Monthly Rental(Rs) </label></td> 
 <td  height="45" width="20"></td> 
-<td  height="45" width="250"><input type="text" class="AddFormInput" id="Rental" name="monthly_rental" required="required" <?php if($confirmation=='1'){ echo 'readonly=\"readonly\"'; } ?>
+<td  height="45" width="250"><input type="text" class="AddFormInput" id="MonthlyRental" name="monthly_rental" required="required" <?php if($confirmation=='1'){ echo 'readonly=\"readonly\"'; } ?>
 								value = "<?php if (isset($_POST['monthly_rental'])) echo $_POST['monthly_rental']; ?>"/></td> 
 </tr>
 <tr>
@@ -175,7 +174,7 @@
 										echo '<button id="BtnConfirm" form="ShopRentalPayerDetail" type="submit" name="confirm"> Confirm </button>';
 										echo '<button id="BtnCancel" form="ShopRentalPayerDetail" type="submit" name="cancel"> Cancel </button>';
 									}
-								?></button></td>
+								?></td>
 </tr>
 </table>
 </form>

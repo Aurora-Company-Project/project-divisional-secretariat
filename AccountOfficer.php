@@ -63,11 +63,10 @@
 <div id="PageHeading">
 <h1>Welcome! <?php echo "$first_name " ."$last_name" ?> </h1>
 </div>
-<div id="Message">
-
-</div>
-<div id="Detail">
-<h2> </h2>
+<div id="Notifications">
+<h2>Notifications</h2>
+<h3> Assesment Tax </h3>
+<h3> Shop Rental </h3>
 </div>
 </div>
 <div id="footer"></div>
