@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2017 at 09:05 AM
+-- Generation Time: Jul 17, 2017 at 07:35 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_ds`
 --
-CREATE DATABASE IF NOT EXISTS `project_ds` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `project_ds` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `project_ds`;
 
 -- --------------------------------------------------------
@@ -43,16 +43,6 @@ CREATE TABLE `assesment_tax_detail` (
   `arrears` double NOT NULL DEFAULT '0',
   `current_bal` double DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `assesment_tax_detail`
---
-
-INSERT INTO `assesment_tax_detail` (`id`, `ward_no`, `lane`, `side`, `assesment_no`, `owner_name`, `address`, `property_detail`, `asset_value`, `annual_tax`, `arrears`, `current_bal`) VALUES
-('28MURL6', 28, 'MUR', 'R', 6, 'ryuty', 'hj', 'tj', 56, 1, 56, 2),
-('26NR3', 26, 'NR', 'R', 3, 'hhgfh', 'gfdgfh', 'ghg', 2356, 1, 23, 5),
-('27NRL8', 27, 'NR', 'L', 8, 'hggfh', 'gfh', 'ghjj', 10, 1, 78, 6),
-('25VRL10', 25, 'VR', 'R', 10, 'nb', 'fdh', 'dfbhg', 100, 1, 12, 78);
 
 -- --------------------------------------------------------
 
@@ -93,7 +83,7 @@ CREATE TABLE `shop_rental_detail` (
   `owner_address` varchar(200) NOT NULL,
   `shop_address` varchar(200) NOT NULL,
   `tender_value` double NOT NULL DEFAULT '0',
-  `annual_tax_val` double NOT NULL DEFAULT '0',
+  `monthly_rental` double NOT NULL DEFAULT '0',
   `arrears` double NOT NULL DEFAULT '0',
   `fines` double NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -173,6 +163,25 @@ ALTER TABLE `user_accounts`
 --
 ALTER TABLE `user_accounts`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+DELIMITER $$
+--
+-- Events
+--
+DROP EVENT `update_arrears_assesment_tax`$$
+CREATE DEFINER=`root`@`localhost` EVENT `update_arrears_assesment_tax` ON SCHEDULE EVERY 1 YEAR STARTS '2017-07-16 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE assesment_tax_detail SET arrears = arrears + current_bal$$
+
+DROP EVENT `update_current_balance_assesment_tax`$$
+CREATE DEFINER=`root`@`localhost` EVENT `update_current_balance_assesment_tax` ON SCHEDULE EVERY 1 QUARTER STARTS '2017-07-01 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE assesment_tax_detail SET current_bal = current_bal + (annual_tax/4)$$
+
+DROP EVENT `update_arrears_shop_rental`$$
+CREATE DEFINER=`root`@`localhost` EVENT `update_arrears_shop_rental` ON SCHEDULE EVERY 1 MONTH STARTS '2017-07-11 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE shop_rental_detail SET arrears = arrears + monthly_rental$$
+
+DROP EVENT `update_fines_shop_rental`$$
+CREATE DEFINER=`root`@`localhost` EVENT `update_fines_shop_rental` ON SCHEDULE EVERY 1 MONTH STARTS '2017-07-11 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE shop_rental_detail
+SET fines = fines + monthly_rental *(SELECT shop_rental_fine_rate FROM policies WHERE id=1)/100 WHERE arrears>0$$
+
+DELIMITER ;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
