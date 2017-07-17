@@ -97,6 +97,7 @@
         <button id="generate" name="generate" type="submit" value="1"> Generate </button>
       </div>
     </form>
+    
 </div>
 <?php if ((isset($_POST['generate'])) && ($month!='None')) { ?>
 
