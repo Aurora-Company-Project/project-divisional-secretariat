@@ -8,7 +8,6 @@
 	if (isset($_POST['getcustom'])){	
 		$go=$_POST['getcustom'];
 		$search=$_POST['search'];
-		
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,6 +24,7 @@
 <div id="Header"> </div>
 <div id="NavBar"> 
 	<nav>
+    
 		<ul>
 			<li> <a href="AccountAdmin.php"> Home </a></li>
             <li class="DropDwnElmnt"> <a href="#"> Add Tax Payer</a>
