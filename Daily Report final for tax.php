@@ -84,64 +84,64 @@
 
   <div id="Headline1">
     <h1>Secretary Office Bemmulla</h1>
-    <h1>Assesent Tax Payer</h1>
+    <h1>Assesment Tax Payer</h1>
     <h1>Daily Report</h1>
   </div>
   <div id="getter" class="information">
     <form action="" method="post" >
       <label>Select Date : </label>
-      <input id="select_date" name="select_date" type="date" value="<?php if(isset($date)) echo $date; ?>" required="required" />
+      <input id="select_date" name="select_date" type="date" max=<?php echo date("Y-m-d",strtotime('-1 day'))?> value="<?php if(isset($date)) echo $date; ?>" required="required" />
       <div id="btn">
         <button id="generate" name="generate" type="submit" value="1"> Generate </button>
       </div>
     </form>
   </div>
   <?php if (isset($_POST['generate'])) { ?>
+  <div class="table_header">
+   		<p><?php echo $_POST['select_date']." "?>Date Report</p>
+   </div>
+  
   <table border="2" id="tb">
     <tr>
       <td width="50" align="center">No</td>
       <td width="216" align="center">ID</td>
-      <td width="251" align="center">Assesment No</td>
+      <td width="251" align="center">Bill No</td>
       <td width="209" align="center">Payment (Rs.)</td>
     </tr>
     <?php 
-			$check_query_id = "SELECT `id` FROM `assesment_tax_detail`" ;
-			$id_result = mysqli_query($link,$check_query_id);
 			$date=$_POST['select_date'];
+			$check_query_id = "SELECT * FROM `assesment_tax_bills` WHERE DATE(date_time)='$date'" ;
+			$id_result = mysqli_query($link,$check_query_id);
 			
-			while($row=mysqli_fetch_array($id_result)){
-				$id=$row['id'];
-				$check_query_customer="SELECT * FROM $id WHERE date='$date'";
-				$custom_result = mysqli_query($link,$check_query_customer);
-				while($row_custom=mysqli_fetch_array($custom_result)){ 
-					$bool=true;											?>
-                    <tr>
-                      <td align="center"><?php $i=$i+1; echo $i; ?></td>
-                      <td align="center"><?php echo $row['id'] ?></td>
-                      <td align="center"><?php echo $row_custom['bill_no'] ?></td>
-                      <td align="right"><?php echo $row_custom['payment']; $amount+=$row_custom['payment']; ?></td>
-                    </tr>
-			<?php } 
-                }
-				if ($bool==false) { ?>
-                	<tr><td></td><td></td><td></td><td></td></tr>
-               	<?php } ?>
+			while($row_custom=mysqli_fetch_array($id_result)){ 
+				$bool=true;											?>
+                <tr>
+                   <td align="center"><?php $i=$i+1; echo $i; ?></td>
+                   <td align="center"><?php echo $row_custom['id'] ?></td>
+                   <td align="center"><?php echo $row_custom['bill_no'] ?></td>
+                   <td align="right"><?php echo $row_custom['payement']; $amount+=$row_custom['payement']; ?></td>
+                 </tr>
+	<?php } 
+              
+			if ($bool==false) { ?>
+               	<tr><td></td><td></td><td></td><td></td></tr>
+           	<?php }  ?>
+			
+			
   </table>
   <table id="table2" height="50">
     <tr>
-      <td>No of payers  : <?php echo $i ?></td>
+      <td>No of Rental payers     : <?php echo $i ?></td>
     </tr>
     <tr>
-      <td>Total Income  : Rs.</td>
-      <td ><?php echo $amount ?></td>
+      <td>Total Income : Rs.<?php echo $amount ?></td>
+     
     </tr>
   </table>
-   <button id="detail" type="button" onclick="myFunction()" target="">Print View</button>
-   
-   
+     <button id="detail" type="button" onclick="myFunction()" target="">Print View</button>
   <?php } ?>
-
 </div>
+
 <script>
 function myFunction() {
 	var blocks=['getter','detail','NavBar']
@@ -153,11 +153,11 @@ function myFunction() {
             x.style.display = 'none';
         }
     }
-	window.open('Daily Report final for tax.php');
-    window.print();
+	window.open('Daily Report final for rental.php');
+	window.print();
+	
 }
 </script>
-
 
 <div id="footer"></div>
 </div>

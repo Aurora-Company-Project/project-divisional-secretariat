@@ -5,7 +5,7 @@
 	$bool=false;
 	if(isset($_POST['generate'])){
 		include 'connection.php';
-		$month=$_POST['month'];
+		$month=$_POST['select_date_month'];
 		$generate=$_POST['generate'];
 }
 ?>
@@ -88,66 +88,51 @@
 <div id='getter' class="information">
     <form action="" method="post">
             Select Month :
-        <select name="month">
-          <option value="None"">None</option>
-          <option value="January">January</option>
-          <option value="February">February</option>
-          <option value="March">March</option>
-          <option value="April">April</option>
-          <option value="May">May</option>
-          <option value="June">June</option>
-          <option value="July">July</option>
-          <option value="August">August</option>
-          <option value="September">September</option>
-          <option value="October">October</option>
-          <option value="November">November</option>
-          <option value="December" >December</option>
-        </select> <br/>
+        <input id="select_date" name="select_date_month" type="month" max=<?php echo date("Y-m",strtotime('-1 month'))?> value="<?php if(isset($_POST['select_date_month'])) echo $_POST['select_date_month']; ?>" required="required" />
              <div id="btn">
         <button id="generate" name="generate" type="submit" value="1"> Generate </button>
       </div>
     </form>
 </div>
-<?php if ((isset($_POST['generate'])) && ($month!='None')) { ?>
+
+
+<?php if ((isset($_POST['generate'])) && (isset($_POST['select_date_month']))) {
+	
+		$month=$_POST['select_date_month'];
+		$d = date_parse_from_format("Y-m", $month);
+		$dateObj   = DateTime::createFromFormat('!m', $d["month"]);
+		$monthName = $dateObj->format('F');
+		
+		$y = DateTime::createFromFormat("Y-m", $month);
+		$year= $y->format("Y");
+	 ?>
 	<div class="table_header">
-    	<p><?php echo $_POST['month']." " ?>Month Report</p>
+    	<p><?php echo $year." ".$monthName." "?> Report</p>
     </div>
   	<table border="2" id="tb">
   	  <tr>
-   	    <td width="50" align="center">No</td>
-        <td width="216" align="center">ID</td>
-		<td width="216" align="center">Date</td>
-        <td width="251" align="center">Bill No</td>
-        <td width="209" align="center">Payment (Rs.)</td>
-        <td width="209" align="center">Arrears (Rs.)</td>
-        <td width="209" align="center">Fines (Rs.)</td>
+   	    	<td width="50" align="center">No</td>
+			<td width="216" align="center">ID</td>
+            <td width="251" align="center">Assesment No</td>
+            <td width="209" align="center">Payment (Rs.)</td>
+        
 	  </tr>
         <?php 
-		
-			$check_query_id = "SELECT `id` FROM `shop_rental_detail`" ;
-			$id_result = mysqli_query($link,$check_query_id);
-			$month=$_POST['month'];
-			
-			while($row=mysqli_fetch_array($id_result)){
-				$id=$row['id'];
-				$check_query_customer="SELECT * FROM `$id` WHERE MONTHNAME(date)='$month'";
-				$custom_result = mysqli_query($link,$check_query_customer);
-				while($row_custom=mysqli_fetch_array($custom_result)){
-					$bool=true;							?>
-					<tr>
-                    	<td align="center"><?php $i=$i+1; echo $i; ?></td>
-                        <td align="center"><?php echo $row['id'] ?></td>
-                    	<td align="center"><?php echo $row_custom['date'] ?></td>
-                    	<td align="right"><?php echo $row_custom['payment']; $amount+=$row_custom['payment']; ?></td>
-                        <td align="center"><?php echo $row_custom['arrears'] ?></td>
-                        <td align="center"><?php echo $row_custom['fines'] ?></td>
-                    </tr>
-                   
-			<?php } 
-				}
-				if ($bool==false) { ?>
-                	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-               	<?php } ?>
+		$check_query_customer="SELECT * FROM rental_tax_bills WHERE MONTHNAME(date_time)='$monthName' AND YEAR(date_time)='$year' ORDER BY date_time ASC ";
+		$custom_result = mysqli_query($link,$check_query_customer);
+		while($row_custom=mysqli_fetch_array($custom_result)){
+			$bool=true;							?>
+			<tr>
+                    <td align="center"><?php $i=$i+1; echo $i; ?></td>
+                   	<td align="center"><?php echo $row_custom['id'] ?></td>
+                   	<td align="center"><?php echo $row_custom['bill_no'] ?></td>
+                   	<td align="right"><?php echo $row_custom['payement']; $amount+=$row_custom['payement']; ?></td>
+            </tr>
+                      
+		<?php } 
+		if ($bool==false) { ?>
+          	<tr><td></td><td></td><td></td><td></td></tr>
+        <?php } ?>
 	</table>	
          <table id="table2" height="50">
             <tr>
@@ -156,14 +141,13 @@
             <tr>
               <td>Total Income : Rs.<?php echo $amount ?></td>
             </tr>
-         </table>
-       
+         </table>      
     <button id="detail" type="button" onclick="myFunction()" target="">Print View</button>
   
   <?php } ?>
 
-
 </div>
+
 <script>
 function myFunction() {
 	var blocks=['getter','detail','NavBar']

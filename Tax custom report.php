@@ -3,6 +3,7 @@
 	$i=0;
 	$amount=0;
 	include 'connection.php';
+	$message='';
 	$bool=false;
 	if (isset($_POST['getcustom'])){	
 		$go=$_POST['getcustom'];
@@ -12,11 +13,6 @@
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<script type="text/jscript">
-	function getalert(){ 
-		alert('Please select the month');
-		}
-</script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
@@ -87,20 +83,31 @@
 
 <div id="Headline1" align="center">
   <h1>Secretary Office Bemmulla</h1>
-    <h1>Assesment Tax Payer</h1>
-    <h1>Tax Custom Report</h1>
+    <h1>Assesment Tax Payer Report</h1>
+
 </div>
 <div id='getter' class="information">
     <form action="" id="customgetter" method="post">
   		Customer ID : 
-          <input type="text" name="search" placeholder="Search.." value="<?php if(isset($search)) echo $search; ?>"/>
-       <div id="btn">
-       <button name='getcustom' id="generate" type="submit" value="1">GO</button>
-      </div>
+          	<input type="text" name="search" placeholder="Search.." />
+        <div id="date_getter">
+        	<label>From :</label><input type="date" max=<?php echo date("Y-m-d",strtotime('-1 day'))?> name='from_getter' /><br/>
+        	<label>To   :</label><input type="date" max=<?php echo date("Y-m-d",strtotime('-1 day'))?> name='to_getter' />
+        </div>
+       	<div id="btn">
+       		<button name='getcustom' id="generate" type="submit" value="1">Submit</button>
+      	</div>
     </form>
 </div>
-<?php if ((isset($_POST['getcustom'])) && (!(!isset($search) || trim($search) == ''))) {
+<?php if ((isset($_POST['getcustom'])) && (!(!isset($_POST['from_getter']) || trim($_POST['from_getter']) == '')) && (!(!isset($search) || trim($search) == '')) && (!(!isset($_POST['to_getter']) || trim($_POST['to_getter']) == ''))) {
+		if($_POST['from_getter'] > $_POST['to_getter']){ ?>
+			<script> 
+            	alert("Please Select the dates correctly");
+            </script>
+		<?php	}else{
 			$search=$_POST['search'];
+			$from= $_POST['from_getter'];
+			$to=$_POST['to_getter'];
 			$query = "SELECT * FROM `assesment_tax_detail` WHERE id='$search'";
 			$result = mysqli_query($link,$query); 
 			$count=0;
@@ -109,17 +116,18 @@
 				$id=$row1['id'];				
 				switch ($count){
 						case 0: ?>
-                            <table id="custom_details1">
-                                <tr><td width="200">ID  :</td> <td><?php echo $row1['id']?></td></tr>
-                                <tr><td width="200">Assesment No  :</td><td><?php echo $row1['assesment_no']?></td></tr>
-                                <tr><td width="200">Owner Name  :</td><td><?php echo $row1['owner_name']?></td></tr>
-                                <tr><td width="200">Address  :</td><td><?php echo $row1['address']?></td></tr>
-                                <tr><td width="200">Property Details  :</td><td><?php echo $row1['property_detail']?></td></tr>
-                              	<tr><td width="200">Current Balance  :</td><td><?php echo $row1['current_bal']?></td></tr>
+                            <table id="custom_details">
+                                <tr><td width="150">Owner Name</td> <td align="left"><?php echo $row1['owner_name']?></td></tr>
+                                <tr><td width="150">Shop Address</td><td align="left"><?php echo $row1['shop_address']?></td></tr>
+                                <tr><td width="150">Tender Value</td><td align="left"><?php echo $row1['tender_value']?></td></tr>
+                                <tr><td width="150">Annual Tax Value</td><td align="left"><?php echo $row1['monthly_rental']?></td></tr>
+                                 <tr><td width="150">Arrears</td><td align="left"><?php echo $row1['arrears']?></td></tr>
+                                <tr><td width="150">Fines</td><td align="left"><?php echo $row1['fines']?></td></tr>
                             </table>
 				
-				
-			<?php } $check_query = "SELECT * FROM $id";
+			<?php }
+			}
+		 	$check_query = "SELECT * FROM `assesment_tax_bills` WHERE id='$search' AND date_time BETWEEN '$from' AND '$to' ORDER BY date_time ASC";
 			$result1 = mysqli_query($link,$check_query);
 			
 			while($row=mysqli_fetch_array($result1)){	
@@ -134,37 +142,37 @@
                                     <td width="251" align="center">Bill No</td>
                                     <td width="209" align="center">Payment (Rs.)</td>
                                   </tr>
-                                  <tr>
-                                        <td align="center"><?php $i=$i+1; echo $i; ?></td> 
-                                        <td align="center"><?php echo $row['date'] ?></td>
-                                        <td align="center"><?php echo $row['bill_no'] ?></td>
-                                        <td align="right"><?php echo $row['payment']; $amount+=$row['payment']; ?></td>
-                                   </tr>
+                        
 						<?php case 1:	?>
 							<tr>
                                 <td align="center"><?php $i=$i+1; echo $i; ?></td> 
-                                <td align="center"><?php echo $row['date'] ?></td>
+                                <td align="center"><?php echo $row['date_time'] ?></td>
                                 <td align="center"><?php echo $row['bill_no'] ?></td>
-                                <td align="right"><?php echo $row['payment']; $amount+=$row['payment']; ?></td>
+                                <td align="right"><?php echo $row['payement']; $amount+=$row['payement']; ?></td>
                             </tr>
 					<?php }
-				 } }
+				 } 
 			if ($bool==false) { ?>
-               	<div id="message"><p>Please enter the correct Custom ID </p>
-          	<?php } ?>
+                <script> 
+          	alert("Please enter the correct +Custom ID");
+      </script> 
+          	<?php } }?>
 	</table>	
     
-   <button id="detail" type="button" onclick="myFunction();" target="">Print View</button>
-  
+  <button id="detail" type="button" onclick="myFunction();" target="">Print View</button>
   <?php } 
   if ((!isset($search) || trim($search) == '')&& (isset($_POST['getcustom']))){ ?>
-	  <p id="message"><?php echo "Please enter the Custom ID" ?></p></div>
-	<?php  }
+	  <script> 
+          	alert("Please enter the Custom ID");
+      </script>  
+	<?php  } if ((isset($_POST['getcustom'])) && (!(!isset($search) || trim($search) == ''))){ ?>
+		 <script> 
+          	alert("Please select the dates");
+      </script>  
+		<?php }
   ?>
-  
-  
+ 
 </div>
-<div id="footer"></div>
 <script>
 function myFunction() {
 	var blocks=['getter','detail','NavBar']
@@ -176,9 +184,10 @@ function myFunction() {
             x.style.display = 'none';
         }
     }
-	window.open('Tax custom report');
-    window.print();
+    window.open('Rental custom report.php');
+    window.print() 
+    
 }
-</script>
+</script>4
 </body>
 </html>

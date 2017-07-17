@@ -90,13 +90,17 @@
   <div id="getter" class="information">
     <form action="" method="post" >
       <label>Select Date : </label>
-      <input id="select_date" name="select_date" type="date" value="<?php if(isset($date)) echo $date; ?>" required="required" />
+      <input id="select_date" name="select_date" type="date" max=<?php echo date("Y-m-d",strtotime('-1 day'))?> value="<?php if(isset($date)) echo $date; ?>" required="required" />
       <div id="btn">
         <button id="generate" name="generate" type="submit" value="1"> Generate </button>
       </div>
     </form>
   </div>
   <?php if (isset($_POST['generate'])) { ?>
+  <div class="table_header">
+   		<p><?php echo $_POST['select_date']." "?>Date Report</p>
+   </div>
+  
   <table border="2" id="tb">
     <tr>
       <td width="50" align="center">No</td>
@@ -105,27 +109,25 @@
       <td width="209" align="center">Payment (Rs.)</td>
     </tr>
     <?php 
-			$check_query_id = "SELECT `id` FROM `shop_rental_detail`" ;
-			$id_result = mysqli_query($link,$check_query_id);
 			$date=$_POST['select_date'];
+			$check_query_id = "SELECT * FROM `rental_tax_bills` WHERE DATE(date_time)='$date'" ;
+			$id_result = mysqli_query($link,$check_query_id);
 			
-			while($row=mysqli_fetch_array($id_result)){
-				$id=$row['id'];
-				$check_query_customer="SELECT * FROM `$id` WHERE date='$date'";
-				$custom_result = mysqli_query($link,$check_query_customer);
-				while($row_custom=mysqli_fetch_array($custom_result)){ 
-					$bool=true;											?>
-                    <tr>
-                      <td align="center"><?php $i=$i+1; echo $i; ?></td>
-                      <td align="center"><?php echo $row['id'] ?></td>
-                      <td align="center"><?php echo $row_custom['bill_no'] ?></td>
-                      <td align="right"><?php echo $row_custom['payment']; $amount+=$row_custom['payment']; ?></td>
-                    </tr>
-			<?php } 
-                }
-				if ($bool==false) { ?>
-                	<tr><td></td><td></td><td></td><td></td></tr>
-               	<?php } ?>
+			while($row_custom=mysqli_fetch_array($id_result)){ 
+				$bool=true;											?>
+                <tr>
+                   <td align="center"><?php $i=$i+1; echo $i; ?></td>
+                   <td align="center"><?php echo $row_custom['id'] ?></td>
+                   <td align="center"><?php echo $row_custom['bill_no'] ?></td>
+                   <td align="right"><?php echo $row_custom['payement']; $amount+=$row_custom['payement']; ?></td>
+                 </tr>
+	<?php } 
+              
+			if ($bool==false) { ?>
+               	<tr><td></td><td></td><td></td><td></td></tr>
+           	<?php }  ?>
+			
+			
   </table>
   <table id="table2" height="50">
     <tr>
