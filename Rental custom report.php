@@ -111,10 +111,12 @@
 				switch ($count){
 						case 0: ?>
                             <table id="custom_details">
-                                <tr><td width="50">Owner Name</td> <td><?php echo $row1['owner_name']?></td></tr>
-                                <tr><td width="50">Shop Address</td><td><?php echo $row1['shop_address']?></td></tr>
-                                <tr><td width="50">Tender Value</td><td><?php echo $row1['tender_value']?></td></tr>
-                                <tr><td width="50">Annual Tax Value</td><td><?php echo $row1['annual_tax_val']?></td></tr>
+                                <tr><td width="150">Owner Name</td> <td align="right"><?php echo $row1['owner_name']?></td></tr>
+                                <tr><td width="150">Shop Address</td><td align="right"><?php echo $row1['shop_address']?></td></tr>
+                                <tr><td width="150">Tender Value</td><td align="right"><?php echo $row1['tender_value']?></td></tr>
+                                <tr><td width="150">Annual Tax Value</td><td align="right"><?php echo $row1['annual_tax_val']?></td></tr>
+                                 <tr><td width="150">Arrears</td><td align="right"><?php echo $row1['arrears']?></td></tr>
+                                <tr><td width="150">Fines</td><td align="right"><?php echo $row1['fines']?></td></tr>
                             </table>
 				
 				
@@ -153,16 +155,30 @@
           	<?php } ?>
 	</table>	
     
-   <button id="detail" type="button">Save</button>
-  <div id="hyperlink" > <a href="#" target="_blank" onclick="window.open('Monthly Report.php').print() " type="button">Print Report</a> </div>
+  <button id="detail" type="button" onclick="myFunction();" target="">Print View</button>
   <?php } 
   if ((!isset($search) || trim($search) == '')&& (isset($_POST['getcustom']))){ ?>
 	  <p id="message"><?php echo "Please enter the Custom ID" ?></p></div>
 	<?php  }
   ?>
-  
-  
+ 
 </div>
+<script>
+function myFunction() {
+	var blocks=['getter','detail','NavBar']
+   	for (y=0; y < blocks.length; y++){
+        var x = document.getElementById(blocks[y]);
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+    window.open('Rental custom report.php');
+    window.print() 
+    
+}
+</script>
 <div id="footer"></div>
 
 </body>

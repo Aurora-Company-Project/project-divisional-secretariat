@@ -90,7 +90,7 @@
     <h1>Assesment Tax Payer</h1>
     <h1>Tax Custom Report</h1>
 </div>
-<div class="information">
+<div id='getter' class="information">
     <form action="" id="customgetter" method="post">
   		Customer ID : 
           <input type="text" name="search" placeholder="Search.." value="<?php if(isset($search)) echo $search; ?>"/>
@@ -154,8 +154,8 @@
           	<?php } ?>
 	</table>	
     
-   <button id="detail" type="button">Save</button>
-  <div id="hyperlink" > <a href="#" target="_blank" onclick="window.open('Monthly Report.php').print() " type="button">Print Report</a> </div>
+   <button id="detail" type="button" onclick="myFunction();" target="">Print View</button>
+  
   <?php } 
   if ((!isset($search) || trim($search) == '')&& (isset($_POST['getcustom']))){ ?>
 	  <p id="message"><?php echo "Please enter the Custom ID" ?></p></div>
@@ -165,6 +165,20 @@
   
 </div>
 <div id="footer"></div>
-
+<script>
+function myFunction() {
+	var blocks=['getter','detail','NavBar']
+   	for (y=0; y < blocks.length; y++){
+        var x = document.getElementById(blocks[y]);
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+    }
+	window.open('Tax custom report');
+    window.print();
+}
+</script>
 </body>
 </html>
