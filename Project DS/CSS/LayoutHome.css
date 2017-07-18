@@ -39,59 +39,8 @@ body {
 	overflow:auto;
 	background-image:url(../images/AdminWelcom.jpg);
 }
-h3 {
-	font-family:Arial, Helvetica, sans-serif;
-	color:#F00;
-	margin-left:65px;
-	font-size:16px;
-}
-	
 
-#PageHeading{
-	margin-top:10px;
-	height:auto;
-	margin-bottom:10px;
-	background-color:rgba(243,243,246,0.5);
-	border-radius:2%;
-}
 
-h1 {
-	font-family:Arial, Helvetica, sans-serif;
-	color:#009;
-	font-weight:500;
-	font-size:40px;
-	margin-left:10px;
-	re0201.3
-}
-
-h2 {
-	font-family:Arial, Helvetica, sans-serif;
-	color:#000;
-	font-weight:lighter;
-	font-size:20px;
-	margin-left:10px;
-	padding-bottom:12px;
-}
-
-#Message {
-	width:300px;
-	float:left;
-	border:thin;
-	border-color:#00F;
-}
-
-#Detail {
-	width:890px;
-	float:right;
-}
-
-#Detail #DetailHeader {
-	padding-left:55px;
-}
-
-a {
-	color:#09F;
-}
 footer{
 	position:absolute; 
 	display:block; 
