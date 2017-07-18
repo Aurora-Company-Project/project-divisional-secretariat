@@ -1,0 +1,122 @@
+body {
+	margin:0;
+	padding:0;
+}
+
+#Holder {
+	width:1200px;
+	height:auto;
+	margin-top:21px;
+	margin-bottom:21px;
+	margin-left:auto;
+	margin-right:auto;
+	border:thick #009;
+}
+
+#Header {
+	height:70px;
+	margin-bottom:11px;
+}
+
+#Notifications {
+	width:900px;
+	margin-left:100px;
+}
+
+#Notifications h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#06F;
+	margin-left:20px;
+	font-size:16px;
+}
+
+#Notifications h2 {
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:700;
+	font-size:24px;
+	margin-left:20px;
+}
+
+#Notifications tr {
+	height:60px;
+}
+
+#NavBar {
+	height:60px;
+	background-color:#009;
+	overflow:hidden;
+}
+
+#Content {
+	min-height:700px;
+	clear:both;
+	overflow:auto;
+}
+
+#Detail h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#F00;
+	margin-left:20px;
+	font-size:16px;
+}
+	
+
+#PageHeading{
+	margin-top:5px;
+	height:auto;
+	margin-bottom:5px;
+}
+
+h1 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#009;
+	font-weight:500;
+	font-size:40px;
+	margin-left:10px;
+}
+
+#Detail h2 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000;
+	font-weight:lighter;
+	font-size:20px;
+	margin-left:10px;
+	padding-bottom:12px;
+}
+
+#Message h2 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000;
+	font-weight:lighter;
+	font-size:20px;
+	margin-left:10px;
+	padding-bottom:12px;
+}
+
+#Message {
+	width:300px;
+	float:left;
+	border:thin;
+	border-color:#00F;
+}
+
+#Detail {
+	width:890px;
+	float:right;
+}
+
+#Detail #DetailHeader {
+	padding-left:55px;
+}
+
+#footer {
+	height:100px;
+}
+
+#errorMessage {
+	
+}
+
+a {
+	color:#09F;
+}
