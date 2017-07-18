@@ -21,7 +21,9 @@
 		database_query($query);
 		header('Location: Successfull.php');
 	}else if (isset($_POST['submit'])) {
-		if (is_numeric($_POST['shop_no']) && is_numeric($_POST['tender_value']) && is_numeric($_POST['monthly_rental'])){
+		if (!(is_numeric($_POST['owner_name'])) && !(is_numeric($_POST['owner_address'])) && !(is_numeric($_POST['shop_address']))){
+		if ($_POST['shop_no']>0 && $_POST['shop_no']<11 && is_numeric($_POST['tender_value']) 
+			&& $_POST['tender_value']>0 && is_numeric($_POST['monthly_rental']) && $_POST['monthly_rental']>0){
 			$shop_no = $_POST['shop_no'];
 			$check_query = "SELECT * FROM shop_rental_detail WHERE id = $shop_no";
 			$result=database_query($check_query);
@@ -35,6 +37,10 @@
 		} else {
 			$message='Invalid Shop number/ Tender Value/ Monthly Rental.';
 			unset($_POST['submit']);
+		}
+		} else {
+			$message='Invalid Owner Name/ Owner Address/ Shop Address.';
+			unset($_POST['submit']);			
 		}
 	}
 
@@ -116,11 +122,7 @@
 </div>
 <div id="Content"> 
 <div id="PageHeading">
-<h1>Register New Shop Rental Payer </h1>
-</div>
-<div id="Message" >
-<h2> Provide details of the rental payer. </h2>
-<h2> Make sure all details are true and correct. </h2>
+<h1>Shop Rental Payer Registration </h1>
 </div>
 <div id="Detail">
 <h3> <?php echo $message ?></h3>
@@ -147,7 +149,7 @@
 <tr>
 <td  height="45" width="200"><label class="AddFormLabel"> Shop No. </label></td> 
 <td  height="45" width="20"></td> 
-<td  height="45" width="250"><input type="text" class="AddFormInput" id="ShopNo" name="shop_no" required="required" <?php if($confirmation=='1'){ echo 'readonly=\"readonly\"'; } ?>
+<td  height="45" width="250"><input type="number" class="AddFormInput" id="ShopNo" name="shop_no" required="required" <?php if($confirmation=='1'){ echo 'readonly=\"readonly\"'; } ?>
 								value = "<?php if (isset($_POST['shop_no'])) echo $_POST['shop_no']; ?>"/></td> 
 </tr>
 <tr>
@@ -169,11 +171,13 @@
 										echo '<button id="BtnSubmit" form="ShopRentalPayerDetail" type="submit" name="submit"> Submit </button>'; 
 									}
 									else { 
-										echo '<button id="BtnConfirm" form="ShopRentalPayerDetail" type="submit" name="confirm"> Confirm </button>';
-										echo '<button id="BtnCancel" form="ShopRentalPayerDetail" type="submit" name="cancel"> Cancel </button>';
+										echo '<button id="BtnConfirm" form="ShopRentalPayerDetail" type="submit" name="confirm"> Confirm </button>'.
+										 '<button id="BtnCancel" form="ShopRentalPayerDetail" type="submit" name="cancel"> Cancel </button>';
 									}
-								?></td>
+								?>
+                                </td>                           
 </tr>
+
 </table>
 </form>
 </div>

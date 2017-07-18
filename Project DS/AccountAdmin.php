@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/AdminHome.css" rel="stylesheet" type="text/css" />
 <title>Home</title>
 </head>
 <body>
@@ -88,7 +89,7 @@
 	$notification_query = "SELECT * FROM user_accounts WHERE account_state=0";
 	$result = database_query($notification_query);
 	if (!($user = mysqli_fetch_array($result))){
-		echo '<h4> No New Notifications! </h4>';
+		echo '<h3> No New User Registrations! </h3>';
 	} else {
 		$user_id=$user['user_id'];
 		echo '<table>';

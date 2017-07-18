@@ -29,6 +29,7 @@
 		database_query($query);
 		header('Location: Successfull.php');
 	}else if (isset($_POST['submit'])) {
+		if (!(is_numeric($_POST['owner_name'])) && !(is_numeric($_POST['address'])) && !(is_numeric($_POST['property_detail']))){
 		if (is_numeric($_POST['assesment_no']) && is_numeric($_POST['asset_value'])){
 			if (($_POST['ward_no']!='') && ($_POST['lane']!='') && ($_POST['side']!='')){
 				$ward_no = $_POST['ward_no'];
@@ -51,6 +52,10 @@
 			}
 		} else {
 			$message='Please input valid assesment number/asset value.';
+			unset($_POST['submit']);
+		}
+		} else {
+			$message='Please input valid Owner Name/ Address/ Property Detail.';
 			unset($_POST['submit']);
 		}
 	}
@@ -134,20 +139,16 @@
 </div>
 <div id="Content">
 <div id="PageHeading">
-<h1>Register New Assement Tax Payer</h1>
+<h1>Assement Tax Payer Registration</h1>
 </div> 
-<div id="Message" >
-<h2> Provide details of the tax payer. </h2>
-<h2> Make sure all details are true and correct. </h2>
-</div>
 <div id="Detail">
 <h3> <?php echo $message ?></h3>
 <form action="AddAssesmentTaxPayer.php" method="post" id="AssementTaxPayerDetail">
 <table align="left" width="">
 <tr>
-<td  height="45" width="150"><label class="AddFormLabel"> Owner's Name </label></td> 
-<td  height="45" width="20"></td> 
-<td  height="45" width="250"><input type="text" class="AddFormInput" id="OwnerName" name="owner_name" required="required" <?php if($confirmation=='1'){ echo 'readonly=\"readonly\"'; } ?>
+<td  height="30" width="150"><label class="AddFormLabel"> Owner's Name </label></td> 
+<td  height="30" width="20"></td> 
+<td  height="30" width="250"><input type="text" class="AddFormInput" id="OwnerName" name="owner_name" required="required" <?php if($confirmation=='1'){ echo 'readonly=\"readonly\"'; } ?>
 								value = "<?php if (isset($_POST['owner_name'])) echo $_POST['owner_name']; ?>"/></td> 
 </tr>
 <tr>
@@ -223,7 +224,7 @@
 <tr>
 <td  height="45" width="150"><label class="AddFormLabel"> Assesment No. </label></td> 
 <td  height="45" width="20"></td> 
-<td  height="45" width="250"><input type="text" class="AddFormInput" id="AssesmentNo" name="assesment_no" required="required" <?php if($confirmation=='1'){ echo 'readonly=\"readonly\"'; } ?>
+<td  height="45" width="250"><input type="number" class="AddFormInput" id="AssesmentNo" name="assesment_no" required="required" <?php if($confirmation=='1'){ echo 'readonly=\"readonly\"'; } ?>
 								value = "<?php if (isset($_POST['assesment_no'])) echo $_POST['assesment_no']; ?>" /></td> 
 </tr>
 <tr>
