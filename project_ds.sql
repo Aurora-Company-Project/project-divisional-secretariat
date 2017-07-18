@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2017 at 07:27 AM
+-- Generation Time: Jul 18, 2017 at 03:53 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_ds`
 --
+CREATE DATABASE IF NOT EXISTS `project_ds` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `project_ds`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `assesment_tax_bills`
 --
 
+DROP TABLE IF EXISTS `assesment_tax_bills`;
 CREATE TABLE `assesment_tax_bills` (
   `bill_no` int(10) UNSIGNED NOT NULL,
   `id` varchar(8) NOT NULL,
@@ -40,6 +43,7 @@ CREATE TABLE `assesment_tax_bills` (
 -- Table structure for table `assesment_tax_detail`
 --
 
+DROP TABLE IF EXISTS `assesment_tax_detail`;
 CREATE TABLE `assesment_tax_detail` (
   `id` varchar(25) NOT NULL,
   `ward_no` int(2) NOT NULL,
@@ -68,6 +72,7 @@ INSERT INTO `assesment_tax_detail` (`id`, `ward_no`, `lane`, `side`, `assesment_
 -- Table structure for table `policies`
 --
 
+DROP TABLE IF EXISTS `policies`;
 CREATE TABLE `policies` (
   `id` int(2) NOT NULL,
   `secretary_of_the_pradeshiya_saba` varchar(45) NOT NULL,
@@ -93,6 +98,7 @@ INSERT INTO `policies` (`id`, `secretary_of_the_pradeshiya_saba`, `gazette_no`, 
 -- Table structure for table `shop_rental_bills`
 --
 
+DROP TABLE IF EXISTS `shop_rental_bills`;
 CREATE TABLE `shop_rental_bills` (
   `bill_no` int(10) UNSIGNED NOT NULL,
   `customer_id` int(2) NOT NULL,
@@ -107,6 +113,7 @@ CREATE TABLE `shop_rental_bills` (
 -- Table structure for table `shop_rental_detail`
 --
 
+DROP TABLE IF EXISTS `shop_rental_detail`;
 CREATE TABLE `shop_rental_detail` (
   `id` int(2) NOT NULL,
   `owner_name` varchar(100) NOT NULL,
@@ -131,6 +138,7 @@ INSERT INTO `shop_rental_detail` (`id`, `owner_name`, `owner_address`, `shop_add
 -- Table structure for table `user_accounts`
 --
 
+DROP TABLE IF EXISTS `user_accounts`;
 CREATE TABLE `user_accounts` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(100) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
@@ -148,12 +156,8 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`user_id`, `user_name`, `first_name`, `last_name`, `email`, `emp_id`, `pwd`, `access_level`, `account_state`) VALUES
-(1, 'admin', 'First', 'Last', 'abc@gmail.com', 1, 'admin', 'Admin', 1),
-(8, 'officer', 'Second', 'Third', 'oficer@123', 10, 'SHA(qwert)', 'Officer', 1),
-(9, 'asd', 'ajda', 'asdkj', 'm@123', 111, '$1$JE1.eA2.$Wvsi4dhme39oaWXXJeExW1', 'Officer', 0),
-(10, 'zxc', 'asda', 'sasd', '100@123', 14, '19b58543c85b97c5498edfd89c11c3aa8cb5fe51', 'Officer', 0),
-(11, 'mevan', 'First', 'Last', '100@123', 100, 'f10e2821bbbea527ea02200352313bc059445190', 'Officer', 0),
-(12, 'asd123', 'asda', 'adas', '123@123', 12, 'f10e2821bbbea527ea02200352313bc059445190', 'Officer', 1);
+(1, 'admin', 'First', 'Last', 'abc@gmail.com', 1, 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 1),
+(14, 'officer', 'Second', 'Third', 'officer@sl', 9, '7030a99c0d1e66d0ff2ef7b5ec41b67a74c07957', 'Officer', 1);
 
 --
 -- Indexes for dumped tables
@@ -221,17 +225,21 @@ ALTER TABLE `shop_rental_bills`
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 DELIMITER $$
 --
 -- Events
 --
+DROP EVENT `update_arrears_assesment_tax`$$
 CREATE DEFINER=`root`@`localhost` EVENT `update_arrears_assesment_tax` ON SCHEDULE EVERY 1 YEAR STARTS '2017-07-16 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE assesment_tax_detail SET arrears = arrears + current_bal$$
 
+DROP EVENT `update_current_balance_assesment_tax`$$
 CREATE DEFINER=`root`@`localhost` EVENT `update_current_balance_assesment_tax` ON SCHEDULE EVERY 1 QUARTER STARTS '2017-07-01 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE assesment_tax_detail SET current_bal = current_bal + (annual_tax/4)$$
 
+DROP EVENT `update_arrears_shop_rental`$$
 CREATE DEFINER=`root`@`localhost` EVENT `update_arrears_shop_rental` ON SCHEDULE EVERY 1 MONTH STARTS '2017-07-11 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE shop_rental_detail SET arrears = arrears + monthly_rental$$
 
+DROP EVENT `update_fines_shop_rental`$$
 CREATE DEFINER=`root`@`localhost` EVENT `update_fines_shop_rental` ON SCHEDULE EVERY 1 MONTH STARTS '2017-07-11 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE shop_rental_detail
 SET fines = fines + monthly_rental *(SELECT shop_rental_fine_rate FROM policies WHERE id=1)/100 WHERE arrears>0$$
 
