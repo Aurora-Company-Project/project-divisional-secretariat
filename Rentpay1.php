@@ -3,37 +3,13 @@
 	require('connect_database.php');
 		//$id = $_GET['link'];
 		$id= "rl25";
-		require_once('connect_database.php');
-		$query= "select * FROM assesment_tax_detail WHERE id= '$id'";
+		$query= "select * FROM shop_rental_detail WHERE id= '$id'";
 		$detail = mysqli_fetch_array(database_query($query));
-		$current_bill="SELECT COUNT(*) FROM assesment_tax_bills";
-		$bill_no = $current_bill+1;
-		//inside submit;
-		if(isset($_POST['submit'])){
-			$payment=$_POST['amount'];
-			$id=$_POST['id'];
-			$date_time=date('m/d/Y');
-			$bill_no=$_POST['bill_no'];			
-			$query = "INSERT INTO assesment_tax_bills set (bill_no , id , date_time , payment) VALUES ('$payment','$id','$date_time','$bill_no')" ;						
-			database_query($query);
-			$query="select * FROM assesment_tax_bills WHERE id= '$id'";
-			$detail_bill = mysqli_fetch_array(database_query($query2));
-			$paid=$detail_bill['payment'];
-			if($detail['arrears']>$paid){
-				$new_arrears=$detail['arrears']-$paid;
-				}
-			else{
-				$new_arrears=0;
-				$valid_pay= $paid-$detail['arrears'];			
-				}
-			$query= "UADATE assesment_tax_detail set arrears='$new_arrears' WHERE id='$id'";
-			database_query($query);
-			$query= "UADATE assesment_tax_bills set payment='$valid_pay' WHERE id='$id'";
-			database_query($query);
-			header("Location: Assespay1.php");}
-		if(isset($_POST['cancel'])){
-			header("Location: OfficerSearchAssesmentTaxPayer.php");}
-		
+		$query2 = "select * FROM assesment_tax_bills WHERE id= '$id'";
+		$detail_bill = mysqli_fetch_array(database_query($query2));
+		$arrears = $detail["arrears"];
+		$amount = $detail_bill["payment"];
+		$bill_no = $detail_bill["bill_no"];	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -44,7 +20,7 @@
 <title>Home</title>
 <style type="text/css">
 	table {; alignment-baseline:middle ; position:absolute ;}
-	td {width:500 ; height:50 ; border-width: 2 ; alignment-adjust:central ; font-size: 32px ;}
+	td {width:500 ; height:50 ; border-width: 2 ; alignment-adjust:central ; font-size: 24px ;}
 	#button {alignment-adjust:central;}
 </style>
 </head>
@@ -103,40 +79,51 @@
 
 </div>
 <div id="Message">
-	
-<form action="Assespay1.php" method="post" id="APayForm">
-<table > 
-	<tr> <td>
-<label for="owner_name"> Owner Name </label>
-	</td><td> 
-<input type="text" id="ownername" name="ownername" value="<?= $detail['owner_name'] ?>" /> <br />
-	</td></tr>
-    <tr> <td>
-<label for="arrears"> Arrears </label> 
-	</td><td>
-<input type="number" id="arrears" name="arrears" value="<?= $detail['arrears'] ?>" /> <br />
-	</td></tr>
-	<tr> <td>
-<label for="bill_no"> Bill_No: </label> 
-	</td><td>
-<input type="text" id="bill" name="bill" value="<?= $bill_no ?>"/> <br/>
-	</td></tr>
-    <tr> <td>
-<label for="amount"> Paid Amount </label> 
-	</td><td>
-<input type="text"  id="amount" name="amount"  value=""/> <br/>
-	</td></tr>
-    
-	<tr> <td>
-<button type="submit" form="PayForm" name="Paid" > Submit </button>
-<button type="submit" form="PayForm" name="close" > Cancel </button>
-	</td></tr>
-</table>
-</form>
 </div>
 <div id="Detail">
+<form action="Rentpay1.php" method="post" id="RPayForm1">
+<table > 
+        <tr> <td>
+    <label for="owner_name"> Owner Name </label>
+        </td><td> 
+    <input type="text" id="ownername" name="ownername" value="<?=$detail['owner_name'] ?>" /> <br />
+        </td></tr>
+        <tr> <td>
+    <label for="id"> ID </label> 
+        </td><td>
+    <input type="text" id="id" name="id" value="<?=$detail['id']; ?>"/> <br />
+        </td></tr>
+        <tr> <td>
+    <label for="address"> Owner Address </label> 
+        </td><td>
+    <input type="text" id="address" name="address" value="<?=$detail['owner_address'] ?>"/> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="arrears"> Arrears </label> 
+        </td><td>
+    <input type="number" id="arrears" name="arrears" value="<?= $detail['arrears'] ?>" /> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="amount"> Paid Amount </label> 
+        </td><td>
+    <input type="text"  id="amount" name="amount"  value="<?= $amount?>"/> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="fines"> Fines </label> 
+        </td><td>
+    <input type="text" id="fines" name="fines" value= "<?= $fines?>" /> <br />
+        </td></tr>
+         <tr> <td>
+	<label for="bill_no"> Bill_No: </label> 
+		</td><td>
+	<input type="text" id="bill" name="bill" value="<?= $bill_no ?>"/> <br/>
+		</td></tr>
+    <tr><td>
+    <button type="submit" form="PayForm" name="print" > Print </button>
+    </td></tr>
+    </table>
+</form>
 </div>
-
 </div>
 <div id="footer"></div>
 </div>
