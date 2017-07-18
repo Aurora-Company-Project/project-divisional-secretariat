@@ -5,7 +5,7 @@
 		$id= "rl25";
 		$query= "select * FROM shop_rental_detail WHERE id= '$id'";
 		$detail = mysqli_fetch_array(database_query($query));
-		$query2 = "select * FROM assesment_tax_bills WHERE id= '$id'";
+		$query2 = "select * FROM reantal_tax_bills WHERE id= '$id'";
 		$detail_bill = mysqli_fetch_array(database_query($query2));
 		$arrears = $detail["arrears"];
 		$amount = $detail_bill["payment"];
@@ -86,37 +86,37 @@
         <tr> <td>
     <label for="owner_name"> Owner Name </label>
         </td><td> 
-    <input type="text" id="ownername" name="ownername" value="<?=$detail['owner_name'] ?>" /> <br />
+    <input  readonly="readonly" type="text" id="ownername" name="ownername" value="<?=$detail['owner_name'] ?>" /> <br />
         </td></tr>
         <tr> <td>
     <label for="id"> ID </label> 
         </td><td>
-    <input type="text" id="id" name="id" value="<?=$detail['id']; ?>"/> <br />
+    <input readonly="readonly" type="text" id="id" name="id" value="<?=$detail['id']; ?>"/> <br />
         </td></tr>
         <tr> <td>
     <label for="address"> Owner Address </label> 
         </td><td>
-    <input type="text" id="address" name="address" value="<?=$detail['owner_address'] ?>"/> <br/>
+    <input readonly="readonly" type="text" id="address" name="address" value="<?=$detail['owner_address'] ?>"/> <br/>
         </td></tr>
         <tr> <td>
-    <label for="arrears"> Arrears </label> 
+    <label readonly="readonly" for="arrears"> Arrears </label> 
         </td><td>
     <input type="number" id="arrears" name="arrears" value="<?= $detail['arrears'] ?>" /> <br/>
         </td></tr>
         <tr> <td>
     <label for="amount"> Paid Amount </label> 
         </td><td>
-    <input type="text"  id="amount" name="amount"  value="<?= $amount?>"/> <br/>
+    <input readonly="readonly" type="text"  id="amount" name="amount"  value="<?= $amount?>"/> <br/>
         </td></tr>
         <tr> <td>
     <label for="fines"> Fines </label> 
         </td><td>
-    <input type="text" id="fines" name="fines" value= "<?= $fines?>" /> <br />
+    <input readonly="readonly" type="text" id="fines" name="fines" value= "<?= $detail["arrears"]?>" /> <br />
         </td></tr>
          <tr> <td>
 	<label for="bill_no"> Bill_No: </label> 
 		</td><td>
-	<input type="text" id="bill" name="bill" value="<?= $bill_no ?>"/> <br/>
+	<input readonly="readonly" type="text" id="bill" name="bill" value="<?= $bill_no ?>"/> <br/>
 		</td></tr>
     <tr><td>
     <button type="submit" form="PayForm" name="print" > Print </button>

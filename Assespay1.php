@@ -8,16 +8,17 @@
 		$query_bill = "select * FROM assesment_tax_bills WHERE id= '$id'";
 		$detail_bill = mysqli_fetch_array(database_query($query_bill));
 		$arrears = $detail['arrears'];
+		$date=$detail_bill['date'];
 		$amount = $detail_bill['payment'];
 		$bill_no = $detail_bill['bill_no'];
 		if($detail['arrears']==0){		
-			if(($amount>= $detail['annual_tax']) && (date("d")<=10 && date("m")== 1))
+			if(($amount>= $detail['annual_tax']) && (date("m",strtotime($date))<=1 && date("d",strtotime($date))== 10))
 			{
 				$discount = 0.1*$detail['annual_tax'];
 			}
 			elseif ($amount>= ($detail['annual_tax']/4))
 			{
-				if (((date("d")<31)&& (date("m")==1)) || ((date("d")<30)&& (date("m")==6)) || ((date("d")<30)&& (date("m")==9)) || ((date("d")<31)&& (date("m")==12)))
+			}if ((date("d",strtotime($date))&& (date("m",strtotime($date))==1)) || (date("d",strtotime($date))&& date("m",strtotime($date))) || (date("d",strtotime($date))&& date("m",strtotime($date))) || (date("d",strtotime($date))&& date("m",strtotime($date))))
 				{
 					$discount = 0.05*$detail['annual_tax'];
 				} 
@@ -26,7 +27,7 @@
 			{
 			$discount = 0;
 			}
-	if(ifset($_POST['print'])){
+	if(isset($_POST['print'])){
 		}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -103,37 +104,37 @@
     <tr> <td>
     <label for="owner_name"> Owner Name </label>
         </td><td> 
-    <input type="text" id="ownername" name="ownername" value="<?=$detail['owner_name'] ?>" /> <br />
+    <input readonly="readonly" type="text" id="ownername" name="ownername" value="<?=$detail['owner_name'] ?>" /> <br />
         </td></tr>
         <tr> <td>
     <label for="id"> ID </label> 
         </td><td>
-    <input type="text" id="id" name="id" value="<?=$detail['id']; ?>"/> <br />
+    <input readonly="readonly" type="text" id="id" name="id" value="<?=$detail['id']; ?>"/> <br />
         </td></tr>
         <tr> <td>
     <label for="address"> Address </label> 
         </td><td>
-    <input type="text" id="address" name="address" value="<?=$detail['address'] ?>"/> <br/>
+    <input readonly="readonly" type="text" id="address" name="address" value="<?=$detail['address'] ?>"/> <br/>
         </td></tr>
         <tr> <td>
     <label for="arrears"> Arrears </label> 
         </td><td>
-    <input type="number" id="arrears" name="arrears" value="<?= $detail['arrears'] ?>" /> <br/>
+    <input readonly="readonly" type="number" id="arrears" name="arrears" value="<?= $detail['arrears'] ?>" /> <br/>
         </td></tr>
         <tr> <td>
     <label for="amount"> Paid Amount </label> 
         </td><td>
-    <input type="text"  id="amount" name="amount"  value="<?= $amount?>"/> <br/>
+    <input readonly="readonly" type="text"  id="amount" name="amount"  value="<?= $amount?>"/> <br/>
         </td></tr>
         <tr> <td>
     <label for="discount"> Discount </label> 
         </td><td>
-    <input type="text" id="discount" name="discount" value= "<?= $discount?>" /> <br />
+    <input readonly="readonly" type="text" id="discount" name="discount" value= "<?= $discount?>" /> <br />
         </td></tr>
          <tr> <td>
 	<label for="bill_no"> Bill_No: </label> 
 		</td><td>
-	<input type="text" id="bill_no" name="bill_no" value="<?= $bill_no ?>"/> <br/>
+	<input readonly="readonly" type="text" id="bill_no" name="bill_no" value="<?= $bill_no ?>"/> <br/>
 		</td></tr>
     	<tr><td>
     <button type="submit" form="PayForm" name="print" > Print </button>

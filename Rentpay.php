@@ -5,34 +5,46 @@
 		require_once('connect_database.php');
 		$query= "select * FROM shop_rental_detail WHERE id= $id";
 		$detail = mysqli_fetch_array(database_query($query));
-		$current_bill="SELECT COUNT(*) FROM assesment_tax_bills";
-		$bill_no = $current_bill+1; 
+		$current_bill="SELECT COUNT(*) FROM rental_tax_bills";
+		$bill_no = $current_bill+1;
+		$tot_arrears=$detail['arrears']+$detail['fines']; 
 		 
-		if(isset($_POST['submit'])){
-			$payment=$_POST['amount'];
-			$id=$_POST['id'];
-			$date_time=date('m/d/Y');
-			$bill_no=$_POST['bill_no'];			
-			$query_submit = "INSERT INTO assesment_tax_bills set (bill_no , id , date_time , payment) VALUES ('$payment','$id','$date_time','$bill_no')" ;						
-			database_query($query_submit);
-			$tot_arrears=$detail['arrears']+$detail['fines'];
-			
-			
-			$query_bill="select * FROM assesment_tax_bills WHERE id= '$id'";
-			$detail_bill = mysqli_fetch_array(database_query($query_bill));
-			$paid=$detail_bill['payment'];
-			if($tot_arrears>=$paid){
-				$new_arrears=$tot_arrears>-$paid;				
-				}
-			else{
-				$new_arrears=0;									
-				}
-			$query_update= "UADATE assesment_tax_detail set arrears='$new_arrears' WHERE id='$id'";
-			database_query($query_updaet);
-			
-			header("Location: Rentpay2.php");}
+		if(isset($_POST['submit']))
+		{
+			if(is_numeric($_POST['amount']))
+			{
+				$payment=$_POST['amount'];
+				$id=$_POST['id'];
+				$date_time=date('m/d/Y');
+				$bill_no=$_POST['bill_no'];			
+				$query_submit = "INSERT INTO shop_rental_bills set (bill_no , id , date_time , payment) VALUES ('$payment','$id','$date_time','$bill_no')" ;						
+				database_query($query_submit);
+				
+				
+				
+				$query_bill="select * FROM rental_tax_bills WHERE id= '$id'";
+				$detail_bill = mysqli_fetch_array(database_query($query_bill));
+				$paid=$detail_bill['payment'];
+				if($tot_arrears>=$paid){
+					$new_arrears=$tot_arrears>-$paid;				
+					}
+				else{
+					$new_arrears=0;									
+					}
+				$query_update= "UADATE shop_rental_detail set arrears='$new_arrears' WHERE id='$id'";
+				database_query($query_update);
+				
+				header("Location: Rentpay2.php");
+			}
+			else
+			{
+				$message="No bill has been issued within that number";
+			}
+		}
 		if(isset($_POST['cancel'])){
-			header("Location: OfficerSearchAssesmentTaxPayer.php");}
+			
+			header("Location: OfficerSearchAssesmentTaxPayer.php");
+		}
 		
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
