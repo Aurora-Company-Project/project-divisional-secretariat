@@ -38,26 +38,31 @@
 <html>
 	<head>
 	<title>Login</title>
-	<link href="CSS/Project_Login.css" rel="stylesheet" type="text/css" />
+	    <link rel="stylesheet" href="CSS/Project_Login.css"/>
+
 	</head>
 	<body>
 		<div id="bg"></div>
+	
+	<div class="bgimage">
+	<form class="memberLoginForm" method="POST" action="index.php" autocomplete="off">
 
-	<form class="memberLoginForm" method="POST" action="Login.php" autocomplete="off">
-
-        <h2 align="center">LOGIN!</h2>
+        <h2 align="center">LOGIN FORM</h2>
         <div class="imgcontainer"><img src="images/user_icon.jpg" alt="" class="loginimge"/></div>
         <div class="container">
             <span class="warningMsg"><?php if (!($message=='')) 
 			echo '<img class="warImg" src="images/warning.gif" height="25px" width="25px"/>'; 
 			echo '       '.$message ; ?></span><br/>
-            <label for="username"><b>Username</b></label><br />
-            <input class="user" name="username" type="text" placeholder="Enter Username" required autofocus/><br />
-            <label for="pswrd"><b>Password</b></label><br />
-            <input class="psw" name="pswrd" type="password" placeholder="Enter Password" required/><br />
-            <button class="subBtn" name="login" type="submit">Login</button>
+            <label for="user"><b>Username</b></label><br />
+            <input class="user" name="uname" type="text" placeholder="Enter Username" required autofocus/><br />
+            <label for="psw"><b>Password</b></label><br />
+            <input class="psw" name="Psw" type="password" placeholder="Enter Password" required/>
+			<a class="forgetLink" href=""> Forgot your password?</a> <br/> <br/>
+            <button class="subBtn" name="SubmitBotton" type="submit">Login</button><br /><br />
+            <button class="subBtn" name="Button" type="submit">Register</button>
+
         </div>
-        </form>
+    </form>
 
 	</body>
 	
