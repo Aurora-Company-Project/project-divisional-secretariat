@@ -1,0 +1,85 @@
+.AddFormLabel {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	margin-left:20px;
+}
+
+.AddFormInput {
+	border-radius:4px;
+	min-height:25px;
+}
+
+select {
+	border-radius:4px;
+	height:25px;
+}
+
+#OwnerName{
+	width:200px;
+}
+
+#ShopNo {
+	width:35px;
+}
+
+#TenderVal {
+	width:130px;
+}
+
+#MonthlyRental {
+	width:130px;
+}
+
+#BtnSubmit {
+	font-size:16px;
+	margin-left:75px;
+	text-align:center;
+	width:100px;
+	border-radius:4px;
+	background-color:#009;
+	color:#FFF;
+	line-height:25px;
+	height:30px;
+}
+	
+#BtnCancel {
+	font-size:16px;
+	margin-left:140px;
+	text-align:center;
+	width:80px;
+	position:absolute;
+	border-radius:4px;
+	background-color:#009;
+	color:#FFF;
+	line-height:25px;
+	height:30px;
+}
+
+#BtnConfirm {
+	font-size:16px;
+	margin-left:20px;
+	text-align:center;
+	width:80px;
+	position:absolute;
+	border-radius:4px;
+	background-color:#009;
+	color:#FFF;
+	line-height:25px;
+	height:30px;
+}
+
+	
+#BtnSubmit:hover {
+	background-color:#999;
+	color:#009;
+}
+
+#BtnCancel:hover {
+	background-color:#999;
+	color:#009;
+}
+
+#BtnConfirm:hover {
+	background-color:#999;
+	color:#009;
+}
