@@ -3,37 +3,31 @@
 	require('connect_database.php');
 		//$id = $_GET['link'];
 		$id= "rl25";
-		require_once('connect_database.php');
 		$query= "select * FROM assesment_tax_detail WHERE id= '$id'";
 		$detail = mysqli_fetch_array(database_query($query));
-		$current_bill="SELECT COUNT(*) FROM assesment_tax_bills";
-		$bill_no = $current_bill+1;
-		//inside submit;
-		if(isset($_POST['submit'])){
-			$payment=$_POST['amount'];
-			$id=$_POST['id'];
-			$date_time=date('m/d/Y');
-			$bill_no=$_POST['bill_no'];			
-			$query = "INSERT INTO assesment_tax_bills set (bill_no , id , date_time , payment) VALUES ('$payment','$id','$date_time','$bill_no')" ;						
-			database_query($query);
-			$query="select * FROM assesment_tax_bills WHERE id= '$id'";
-			$detail_bill = mysqli_fetch_array(database_query($query2));
-			$paid=$detail_bill['payment'];
-			if($detail['arrears']>$paid){
-				$new_arrears=$detail['arrears']-$paid;
-				}
-			else{
-				$new_arrears=0;
-				$valid_pay= $paid-$detail['arrears'];			
-				}
-			$query= "UADATE assesment_tax_detail set arrears='$new_arrears' WHERE id='$id'";
-			database_query($query);
-			$query= "UADATE assesment_tax_bills set payment='$valid_pay' WHERE id='$id'";
-			database_query($query);
-			header("Location: Assespay1.php");}
-		if(isset($_POST['cancel'])){
-			header("Location: OfficerSearchAssesmentTaxPayer.php");}
-		
+		$query_bill = "select * FROM assesment_tax_bills WHERE id= '$id'";
+		$detail_bill = mysqli_fetch_array(database_query($query_bill));
+		$arrears = $detail['arrears'];
+		$amount = $detail_bill['payment'];
+		$bill_no = $detail_bill['bill_no'];
+		if($detail['arrears']==0){		
+			if(($amount>= $detail['annual_tax']) && (date("d")<=10 && date("m")== 1))
+			{
+				$discount = 0.1*$detail['annual_tax'];
+			}
+			elseif ($amount>= ($detail['annual_tax']/4))
+			{
+				if (((date("d")<31)&& (date("m")==1)) || ((date("d")<30)&& (date("m")==6)) || ((date("d")<30)&& (date("m")==9)) || ((date("d")<31)&& (date("m")==12)))
+				{
+					$discount = 0.05*$detail['annual_tax'];
+				} 
+			}
+			else
+			{
+			$discount = 0;
+			}
+	if(ifset($_POST['print'])){
+		}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -102,41 +96,52 @@
 <div id="PageHeading">
 
 </div>
-<div id="Message">
+<div id= "detail">
 	
-<form action="Assespay1.php" method="post" id="APayForm">
-<table > 
-	<tr> <td>
-<label for="owner_name"> Owner Name </label>
-	</td><td> 
-<input type="text" id="ownername" name="ownername" value="<?= $detail['owner_name'] ?>" /> <br />
-	</td></tr>
+<form action="Assespay1.php" method="post" id="APayForm2">
+<table align="center">
     <tr> <td>
-<label for="arrears"> Arrears </label> 
-	</td><td>
-<input type="number" id="arrears" name="arrears" value="<?= $detail['arrears'] ?>" /> <br />
-	</td></tr>
-	<tr> <td>
-<label for="bill_no"> Bill_No: </label> 
-	</td><td>
-<input type="text" id="bill" name="bill" value="<?= $bill_no ?>"/> <br/>
-	</td></tr>
-    <tr> <td>
-<label for="amount"> Paid Amount </label> 
-	</td><td>
-<input type="text"  id="amount" name="amount"  value=""/> <br/>
-	</td></tr>
-    
-	<tr> <td>
-<button type="submit" form="PayForm" name="Paid" > Submit </button>
-<button type="submit" form="PayForm" name="close" > Cancel </button>
-	</td></tr>
+    <label for="owner_name"> Owner Name </label>
+        </td><td> 
+    <input type="text" id="ownername" name="ownername" value="<?=$detail['owner_name'] ?>" /> <br />
+        </td></tr>
+        <tr> <td>
+    <label for="id"> ID </label> 
+        </td><td>
+    <input type="text" id="id" name="id" value="<?=$detail['id']; ?>"/> <br />
+        </td></tr>
+        <tr> <td>
+    <label for="address"> Address </label> 
+        </td><td>
+    <input type="text" id="address" name="address" value="<?=$detail['address'] ?>"/> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="arrears"> Arrears </label> 
+        </td><td>
+    <input type="number" id="arrears" name="arrears" value="<?= $detail['arrears'] ?>" /> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="amount"> Paid Amount </label> 
+        </td><td>
+    <input type="text"  id="amount" name="amount"  value="<?= $amount?>"/> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="discount"> Discount </label> 
+        </td><td>
+    <input type="text" id="discount" name="discount" value= "<?= $discount?>" /> <br />
+        </td></tr>
+         <tr> <td>
+	<label for="bill_no"> Bill_No: </label> 
+		</td><td>
+	<input type="text" id="bill_no" name="bill_no" value="<?= $bill_no ?>"/> <br/>
+		</td></tr>
+    	<tr><td>
+    <button type="submit" form="PayForm" name="print" > Print </button>
+    	</td></tr>
 </table>
 </form>
 </div>
-<div id="Detail">
 </div>
-
 </div>
 <div id="footer"></div>
 </div>
