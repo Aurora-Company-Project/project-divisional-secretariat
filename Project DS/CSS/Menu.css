@@ -12,28 +12,18 @@ nav ul li {
 	list-style:none;
 	display:block;
 	float:left;
-	width:200px;
+	width:150px;
 	height:60px;
 	text-align:center;
 	line-height:60px;
 	font-family:Arial, Helvetica, sans-serif;
-	font-size:16px;	
-	color: white;
-  	letter-spacing: .05em;
-  	text-shadow: 0 1px 0 #133d3e;
-  	background:linear-gradient(0deg,rgba(21,99,151,0.8),rgba(64,161,226,0.8),rgba(8,70,111,0.9));
-  	border-top-color: #9fb5b5;
-  	border-left-color: #608586;
-  	border-bottom-color: #1b4849;
-  	border-right-color: #1e4d4e;
-  	cursor: pointer;
-  	text-shadow:1px 1px 5px;
+	font-size:16px;
 }
 
 nav ul li a {
 	text-decoration:none;
 	font-family:Arial, Helvetica, sans-serif;
-	color:white;
+	color:#FFF;
 }
 
 nav ul li:hover {
@@ -42,7 +32,7 @@ nav ul li:hover {
 
 nav ul li:hover a{
 	display:block;
-	color:white;
+	color:#009;
 }
 
 .DropDwnElmnt {
@@ -64,9 +54,10 @@ nav ul li:hover a{
 }
 
 .DropDwnCntnt .DrpLst li {
-	width:190px;
+	min-width:150px;
+	width:auto;
 	padding-right:10px;
-	color:white;
+	color:#009;
 	float:none;
 	text-decoration:none;
 	display:block;
@@ -110,7 +101,7 @@ nav ul li:hover a{
 .DrpLst .DropDwnElmnt:hover .submenu{
 	display:block;
 	position:relative;
-	left:200px;
+	left:150px;
 	top:0;
 	margin-top:-40px;
 }

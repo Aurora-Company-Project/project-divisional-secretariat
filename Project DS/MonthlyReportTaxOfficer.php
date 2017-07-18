@@ -4,7 +4,7 @@
 	$amount=0;
 	$bool=false;
 	if(isset($_POST['generate'])){
-		include 'connection.php';
+		include 'connect_database.php';
 		$month=$_POST['select_date_month'];
 		$generate=$_POST['generate'];
 
@@ -114,7 +114,7 @@
 	  </tr></thead>
         <?php 
 		$check_query_customer="SELECT * FROM assesment_tax_bills WHERE MONTHNAME(date_time)='$monthName' AND YEAR(date_time)='$year' ORDER BY date_time ASC ";
-		$custom_result = mysqli_query($link,$check_query_customer);
+		$custom_result = database_query($check_query_customer);
 		while($row_custom=mysqli_fetch_array($custom_result)){
 			$bool=true;							?>
 			<tr>
@@ -143,9 +143,15 @@
 
 </div>
 
+<div id='footer'>
+<footer>
+<p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
+        Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
+</footer>
+</div>
 <script>
 function myFunction() {
-	var blocks=['getter','detail','NavBar']
+	var blocks=['footer','getter','detail','NavBar']
    	for (y=0; y < blocks.length; y++){
         var x = document.getElementById(blocks[y]);
         if (x.style.display === 'none') {
@@ -154,13 +160,9 @@ function myFunction() {
             x.style.display = 'none';
         }
     }
-    window.open('Monthly Report Final for rental.php');
+    window.open('MonthlyReportTaxOfficer.php');
     window.print() 
 }
 </script>
-<footer
-<p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
-        Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
-</footer>
 </body>
 </html>

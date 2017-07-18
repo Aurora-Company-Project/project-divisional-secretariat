@@ -5,7 +5,7 @@
 	$amount=0;
 	$bool=false;
 	if(isset($_POST['generate'])){
-		include 'connection.php';
+		include 'connect_database.php';
 		$month=$_POST['select_date_month'];
 		$generate=$_POST['generate'];
 		
@@ -107,21 +107,21 @@
     <thead>
   	  <tr>
    	    	<td width="50" align="center">No</td>
-			<td width="216" align="center">ID</td>
-            <td width="251" align="center">Assesment No</td>
-            <td width="209" align="center">Payment (Rs.)</td>
+			<td width="50" align="center">ID</td>
+            <td width="100" align="center">Assesment No</td>
+            <td width="100" align="center">Payment (Rs.)</td>
         
 	  </tr></thead>
         <?php 
-		$check_query_customer="SELECT * FROM rental_tax_bills WHERE MONTHNAME(date_time)='$monthName' AND YEAR(date_time)='$year' ORDER BY date_time ASC ";
-		$custom_result = mysqli_query($link,$check_query_customer);
+		$check_query_customer="SELECT * FROM shop_rental_bills WHERE MONTHNAME(date_time)='$monthName' AND YEAR(date_time)='$year' ORDER BY date_time ASC ";
+		$custom_result = database_query($check_query_customer);
 		while($row_custom=mysqli_fetch_array($custom_result)){
 			$bool=true;							?>
 			<tr>
                     <td align="center"><?php $i=$i+1; echo $i; ?></td>
-                   	<td align="center"><?php echo $row_custom['id'] ?></td>
+                   	<td align="center"><?php echo $row_custom['customer_id'] ?></td>
                    	<td align="center"><?php echo $row_custom['bill_no'] ?></td>
-                   	<td align="right"><?php echo $row_custom['payement']; $amount+=$row_custom['payement']; ?></td>
+                   	<td align="right"><?php echo $row_custom['payment']; $amount+=$row_custom['payment']; ?></td>
             </tr>
                       
 		<?php } 
@@ -143,9 +143,15 @@
 
 </div>
 
+<div id="footer">
+<footer>
+<p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
+        Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
+</footer>
+</div>
 <script>
 function myFunction() {
-	var blocks=['getter','detail','NavBar']
+	var blocks=['footer','getter','detail','NavBar']
    	for (y=0; y < blocks.length; y++){
         var x = document.getElementById(blocks[y]);
         if (x.style.display === 'none') {
@@ -154,13 +160,9 @@ function myFunction() {
             x.style.display = 'none';
         }
     }
-    window.open('Monthly Report Final for rental.php');
+    window.open('MonthlyReportRentalOfficer.php');
     window.print() 
 }
 </script>
-<footer
-<p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
-        Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
-</footer>
 </body>
 </html>

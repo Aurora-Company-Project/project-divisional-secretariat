@@ -1,9 +1,8 @@
 <?php
 	require_once("access_officer.php");
 
-	
 	if(isset($_POST['generate'])){
-		include 'connection.php';
+		include 'connect_database.php';
 		$month=$_POST['month'];
 		$generate=$_POST['generate'];
 }
@@ -146,7 +145,7 @@
 				$t_amount=0;
 				$e_amount=0;	 					
  				$id_check_query = "SELECT * FROM assesment_tax_detail ORDER BY annual_tax ASC";
-				$id_result = mysqli_query($link,$id_check_query);
+				$id_result = database_query($id_check_query);
 				while($id_row=mysqli_fetch_array($id_result)){
 					$year=$_POST['year'];
 					$id=$id_row['id'];
@@ -172,7 +171,7 @@
 					
 					$check_query = "SELECT * FROM assesment_tax_bills WHERE  id='$id' AND YEAR(date_time)='$year' AND DATE(date_time) BETWEEN '$start_date' AND '$end_date' ";
 					
-					$balance_result = mysqli_query($link,$check_query);
+					$balance_result = database_query($check_query);
 					$amount=0;
 					$i+=1;
 					while($row=mysqli_fetch_array($balance_result)){
@@ -210,7 +209,7 @@
 <?php }
 	if ((isset($_POST['generate'])) && ($month=='None')) { ?>
 		<script>
-        	alert("Please select the quartet");
+        	alert("Please select the quarter");
         </script>
 		
 	<?php 	}
@@ -220,9 +219,14 @@
   
 
 </div>
+<div id='footer'>
+<footer>
+<p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
+        Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
+</footer></div>
 <script>
 function myFunction() {
-	var blocks=['getter','detail','NavBar']
+	var blocks=['footer','getter','detail','NavBar']
    	for (y=0; y < blocks.length; y++){
         var x = document.getElementById(blocks[y]);
         if (x.style.display === 'none') {
@@ -231,18 +235,10 @@ function myFunction() {
             x.style.display = 'none';
         }
     }
-    window.open('Quarter Report.php');
+    window.open('QuarterReportOfficer.php');
     window.print() 
     
 }
 </script>
-
-
-
-
-<footer
-<p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
-        Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
-</footer>
 </body>
 </html>

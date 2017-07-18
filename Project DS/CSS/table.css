@@ -2,7 +2,6 @@
 /* CSS Document */
 
 
-
   table.t1 {
     margin: 1em auto;
     border-collapse: collapse;
@@ -15,10 +14,10 @@
     padding: 4px 8px;
   }
   .t1 thead th {
-    background: #4f81bd;
-    text-align: left;
-    font-size: 15px;
-    color: #fff;
+	background: #4f81bd;
+	text-align: left;
+	font-size: 15px;
+	color: #000;
   }
   .t1 tr {
     border-right: 1px solid #95b3d7;
@@ -33,11 +32,11 @@
     border-right: 1px solid #95b3d7;
   }
   .t1 th {
-    background: #4f81bd;
-    text-align: left;
-    font-weight: normal;
-    font-size: 10px;
-    color: #fff;
+	background: #4f81bd;
+	text-align: left;
+	font-weight: normal;
+	font-size: 10px;
+	color: #000;
   }
   .t1 tr *:nth-child(5), .t1 tr *:nth-child(6) {
     text-align: right;

@@ -1,5 +1,99 @@
 @charset "utf-8";
 /* CSS Document */
+#Content {
+	min-height:700px;
+	clear:both;
+	overflow:auto;
+	background-image:url(../images/AdminWelcom.jpg);
+}
+h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#F00;
+	margin-left:65px;
+	font-size:16px;
+}
+form input, form button {
+	border-radius:4px;
+	background-color: rgba(255,255,255,0.4);
+
+	box-shadow: 0 0 25px rgba(0,0,0,0.1),inset 0 0 6px rgba(69,69,69,0.6);
+  	width: 150px;
+  	border: 1px solid;
+  	border-bottom-color: rgba(255,255,255,.5);
+  	border-right-color: rgba(60,60,60,.35);
+  	border-top-color: rgba(60,60,60,.35);
+  	border-left-color: rgba(80,80,80,.45);
+  	background-repeat: no-repeat;
+  	font-family:Arial, Helvetica, sans-serif;
+  	letter-spacing: .075em;
+  	color: #000000;
+  	text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  	margin-bottom: 19px;
+}	
+ button {
+	border-radius:4px;
+	background-color: rgba(255,255,255,0.4);
+
+	box-shadow: 0 0 25px rgba(0,0,0,0.1),inset 0 0 6px rgba(69,69,69,0.6);
+  	width: 100px;
+  	border: 1px solid;
+  	border-bottom-color: rgba(255,255,255,.5);
+  	border-right-color: rgba(60,60,60,.35);
+  	border-top-color: rgba(60,60,60,.35);
+  	border-left-color: rgba(80,80,80,.45);
+  	background-repeat: no-repeat;
+  	font-family:Arial, Helvetica, sans-serif;
+  	letter-spacing: .075em;
+  	color: #000000;
+  	text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  	margin-bottom: 19px;
+}	
+#PageHeading{
+	margin-top:10px;
+	height:auto;
+	margin-bottom:10px;
+	background-color:rgba(243,243,246,0.5);
+	border-radius:2%;
+}
+
+h1 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#009;
+	font-weight:500;
+	font-size:40px;
+	margin-left:10px;
+	re0201.3
+}
+
+h2 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000;
+	font-weight:lighter;
+	font-size:20px;
+	margin-left:10px;
+	padding-bottom:12px;
+}
+
+#Message {
+	width:300px;
+	float:left;
+	border:thin;
+	border-color:#00F;
+}
+
+a {
+	color:#09F;
+}
+footer{
+	position:absolute; 
+	display:block; 
+	padding:1px;
+	width:1200px;
+	color:white;
+	background-color:#006;
+}
+
+
 
 #Headline1 h1{
 	text-align: center;
@@ -7,7 +101,6 @@
 	}
 #Headline1{
 	text-align:center;
-	background-color: #33F;
 	vertical-align:central;
 }
 
@@ -21,11 +114,12 @@ div.information{
 	height:100px;
 	top:50px;
 }
+
 #btn {
 	position:relative;
-	top:30px;
-	width:100px;
-	left:130px;
+	margin-top:20px;
+	margin-left:100px;
+	
 	}
 div.table1{
 	height:auto;
@@ -35,11 +129,15 @@ div.table1{
 	}
 
 #custom_details{
-	position:relative;
-	left:300px;
-	top:100px;
-	width:250px;
+	position: relative;
+	margin:auto;
+	margin-top:200px;
 }
+#tb table{position: relative;
+	margin:auto;
+	margin-top:50px;
+	}
+
 
 #custom_details1{
 	position:relative;
@@ -59,16 +157,17 @@ div.table1{
 
 #table2{
 	margin-top:50px;
-	margin-left:250px;
+	margin-left:300px;
 
 }
 #detail{
 	position: relative;
-	left: 500px;
-	top: 50px;
-	font-size: 18px;
-	text-align: center;
-	border-radius: 6px;
+	margin:auto;
+	top:30px;
+	bottom:100px;
+	margin-top:50px;
+	margin-left:500px;
+	margin-bottom:100px;
 }
 
 #save{margin-bottom:100px;;}

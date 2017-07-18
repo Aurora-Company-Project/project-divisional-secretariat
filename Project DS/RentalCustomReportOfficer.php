@@ -2,7 +2,7 @@
 	require_once("access_officer.php");
 	$i=0;
 	$amount=0;
-	include 'connection.php';
+	include 'connect_database.php';
 	$message='';
 	$bool=false;
 	if (isset($_POST['getcustom'])){	
@@ -78,23 +78,27 @@
 </div>
 <div id='getter' class="information">
     <form action="" id="customgetter" method="post">
-  		Customer ID : 
-          	<input type="text" name="search" placeholder="Search.." />
+  		<table><tr><td>
+  		Customer ID : </td>
+          <td><input type="number" name="search" required="required" placeholder="Search.." /></td></tr>
         <div id="date_getter">
-        	<label>From :</label><input required="required" type="date" max=<?php echo date("Y-m-d",strtotime('-1 day'))?> name='from_getter' /><br/>
-        	<label>To   :</label><input required="required" type="date" max=<?php echo date("Y-m-d",strtotime('-1 day'))?> name='to_getter' />
+        	<tr><td><label>From :</label></td>
+       	  <td><input required="required" type="date" max=<?php echo date("Y-m-d",strtotime('-1 day'))?> name='from_getter' /></td></tr><br/>
+        	<tr>
+            <td><label>To   :</label></td>
+          <td><input  required="required" type="date" max=<?php echo date("Y-m-d",strtotime('-1 day'))?> name='to_getter' /></td></tr>
         </div>
-       	<div id="btn">
-       		<button name='getcustom' id="generate" type="submit" value="1">Submit</button>
-      	</div>
+       	<tr height="75"><td></td><div id="btn">
+       		<td><button name='getcustom' id="generate" type="submit" value="1">Submit</button></td></tr>
+      	</div></table>
     </form>
 </div>
-<?php if ((isset($_POST['getcustom'])) && (!(!isset($_POST['from_getter']) || trim($_POST['from_getter']) == '')) && (!(!isset($search) || trim($search) == '')) && (!(!isset($_POST['to_getter']) || trim($_POST['to_getter']) == '')) && !($_POST['from_getter'] > $_POST['to_getter'])) {
+<?php if ((isset($_POST['getcustom'])) && (!($_POST['from_getter'] > $_POST['to_getter']))) {
 			$search=$_POST['search'];
 			$from= $_POST['from_getter'];
 			$to=$_POST['to_getter'];
 			$query = "SELECT * FROM `shop_rental_detail` WHERE id='$search'";
-			$result = mysqli_query($link,$query); 
+			$result = database_query($query); 
 			$count=0;
 			while($row1=mysqli_fetch_array($result)){
 				$bool=true;			
@@ -104,23 +108,23 @@
                             <table id="custom_details">
                                 <tr><td width="150">Owner Name</td> <td align="left"><?php echo $row1['owner_name']?></td></tr>
                                 <tr><td width="150">Shop Address</td><td align="left"><?php echo $row1['shop_address']?></td></tr>
-                                <tr><td width="150">Tender Value</td><td align="left"><?php echo $row1['tender_value']?></td></tr>
-                                <tr><td width="150">Annual Tax Value</td><td align="left"><?php echo $row1['monthly_rental']?></td></tr>
-                                 <tr><td width="150">Arrears</td><td align="left"><?php echo $row1['arrears']?></td></tr>
-                                <tr><td width="150">Fines</td><td align="left"><?php echo $row1['fines']?></td></tr>
+                                <tr><td width="150">Tender Value (Rs.)</td><td align="left"><?php echo $row1['tender_value']?></td></tr>
+                                <tr><td width="150">Annual Tax (Rs.)</td><td align="left"><?php echo $row1['monthly_rental']?></td></tr>
+                                 <tr><td width="150">Arrears (Rs.)</td><td align="left"><?php echo $row1['arrears']?></td></tr>
+                                <tr><td width="150">Fines (Rs.)</td><td align="left"><?php echo $row1['fines']?></td></tr>
                             </table>
 				
 			<?php }
 			}
-		 	$check_query = "SELECT * FROM `rental_tax_bills` WHERE id='$search' AND date_time BETWEEN '$from' AND '$to' ORDER BY date_time ASC";
-			$result1 = mysqli_query($link,$check_query);
+		 	$check_query = "SELECT * FROM `shop_rental_bills` WHERE customer_id='$search' AND date_time BETWEEN '$from' AND '$to' ORDER BY date_time ASC";
+			$result1 = database_query($check_query);
 			
 			while($row=mysqli_fetch_array($result1)){	
 					$bool=true;
 					switch ($count){
 						case 0: 
 							$count+=1;	?>
-                        	<table border="2" id="tb">
+                        	<table class="t1" border="2" id="tb">
                                   <tr>
                                      <th>No</th>
                                     <th>Date</th>
@@ -133,7 +137,7 @@
                                 <td align="center"><?php $i=$i+1; echo $i; ?></td> 
                                 <td align="center"><?php echo $row['date_time'] ?></td>
                                 <td align="center"><?php echo $row['bill_no'] ?></td>
-                                <td align="right"><?php echo $row['payement']; $amount+=$row['payement']; ?></td>
+                                <td align="right"><?php echo $row['payment']; $amount+=$row['payment']; ?></td>
                             </tr>
 					<?php }
 				 } 
@@ -143,16 +147,16 @@
       </script> 
           	<?php  }?>
 	</table>	
-    
+  <?php if ($bool==true){ ?>  
   <button id="detail" type="button" onclick="myFunction();" target="">Print View</button>
-  <?php } 
+  <?php }} 
   if ((!isset($search) || trim($search) == '')&& (isset($_POST['getcustom']))){ ?>
-	  <script> 
+  <script> 
           	alert("Please enter the Custom ID");
       </script>  
-	<?php  } if ((isset($_POST['getcustom'])) && (!isset($_POST['from_getter']) || trim($_POST['from_getter']) == '') && (!isset($search) || trim($search) == '') && (!isset($_POST['to_getter']) || trim($_POST['to_getter']) == '')){ ?>
-		 <script> 
-          	alert("Please select the dates");
+	<?php  } if ((isset($_POST['getcustom'])) && ($_POST['from_getter'] > $_POST['to_getter']) ){ ?>
+  <script> 
+          	alert("Please select the dates correctly");
       </script>  
 		<?php }
             
@@ -160,9 +164,14 @@
  
  
 </div>
+<div id='footer'>
+<footer
+<p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
+        Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
+</footer></div>
 <script>
 function myFunction() {
-	var blocks=['getter','detail','NavBar']
+	var blocks=['footer','getter','detail','NavBar']
    	for (y=0; y < blocks.length; y++){
         var x = document.getElementById(blocks[y]);
         if (x.style.display === 'none') {
@@ -171,14 +180,9 @@ function myFunction() {
             x.style.display = 'none';
         }
     }
-    window.open('Rental custom report.php');
-    window.print() 
-    
+    window.open('RentalCustomReportOfficer.php');
+    window.print(); 
 }
 </script>
-<footer
-<p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
-        Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
-</footer>
 </body>
 </html>
