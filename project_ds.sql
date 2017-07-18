@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2017 at 07:35 AM
+-- Generation Time: Jul 18, 2017 at 07:27 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,8 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_ds`
 --
-CREATE DATABASE IF NOT EXISTS `project_ds` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `project_ds`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assesment_tax_bills`
+--
+
+CREATE TABLE `assesment_tax_bills` (
+  `bill_no` int(10) UNSIGNED NOT NULL,
+  `id` varchar(8) NOT NULL,
+  `date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `payement` double NOT NULL,
+  `bill_state` varchar(10) NOT NULL DEFAULT 'Issued'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -28,7 +40,6 @@ USE `project_ds`;
 -- Table structure for table `assesment_tax_detail`
 --
 
-DROP TABLE IF EXISTS `assesment_tax_detail`;
 CREATE TABLE `assesment_tax_detail` (
   `id` varchar(25) NOT NULL,
   `ward_no` int(2) NOT NULL,
@@ -44,13 +55,19 @@ CREATE TABLE `assesment_tax_detail` (
   `current_bal` double DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `assesment_tax_detail`
+--
+
+INSERT INTO `assesment_tax_detail` (`id`, `ward_no`, `lane`, `side`, `assesment_no`, `owner_name`, `address`, `property_detail`, `asset_value`, `annual_tax`, `arrears`, `current_bal`) VALUES
+('27VRL10', 27, 'VR', 'L', 10, 'Mevan', 'No. 65,\r\nGampaha', 'asdfgh', 1000000, 10000, 70000, 0);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `policies`
 --
 
-DROP TABLE IF EXISTS `policies`;
 CREATE TABLE `policies` (
   `id` int(2) NOT NULL,
   `secretary_of_the_pradeshiya_saba` varchar(45) NOT NULL,
@@ -73,10 +90,23 @@ INSERT INTO `policies` (`id`, `secretary_of_the_pradeshiya_saba`, `gazette_no`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `shop_rental_bills`
+--
+
+CREATE TABLE `shop_rental_bills` (
+  `bill_no` int(10) UNSIGNED NOT NULL,
+  `customer_id` int(2) NOT NULL,
+  `date_time` datetime NOT NULL,
+  `payment` double NOT NULL,
+  `bill_state` varchar(10) NOT NULL DEFAULT 'Issued'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `shop_rental_detail`
 --
 
-DROP TABLE IF EXISTS `shop_rental_detail`;
 CREATE TABLE `shop_rental_detail` (
   `id` int(2) NOT NULL,
   `owner_name` varchar(100) NOT NULL,
@@ -88,13 +118,19 @@ CREATE TABLE `shop_rental_detail` (
   `fines` double NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `shop_rental_detail`
+--
+
+INSERT INTO `shop_rental_detail` (`id`, `owner_name`, `owner_address`, `shop_address`, `tender_value`, `monthly_rental`, `arrears`, `fines`) VALUES
+(10, 'Mevan', 'No. 75, Gampaha', 'No. 80, Bemmulla.', 1000000, 1000, 7000, 0);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `user_accounts`
 --
 
-DROP TABLE IF EXISTS `user_accounts`;
 CREATE TABLE `user_accounts` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(100) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
@@ -102,25 +138,32 @@ CREATE TABLE `user_accounts` (
   `last_name` varchar(100) NOT NULL,
   `email` varchar(200) NOT NULL,
   `emp_id` int(11) NOT NULL,
-  `pwd` varchar(100) NOT NULL,
-  `access_level` varchar(60) NOT NULL DEFAULT 'Officer'
+  `pwd` varchar(40) NOT NULL,
+  `access_level` varchar(60) NOT NULL DEFAULT 'Officer',
+  `account_state` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_accounts`
 --
 
-INSERT INTO `user_accounts` (`user_id`, `user_name`, `first_name`, `last_name`, `email`, `emp_id`, `pwd`, `access_level`) VALUES
-(1, 'admin', 'First', 'Last', 'abc@gmail.com', 1, 'admin', 'Admin'),
-(2, 'mkaru', 'Mevan', 'Karunanayake', 'mevan@abc.com', 23, '12345', 'Officer'),
-(4, 'qwer', 'mas', 'karun', 'm@123', 114, '1234', 'Officer'),
-(5, 'adka', 'sdasd', 'asq', 'm@123', 2134, '123', 'Officer'),
-(6, 'qwqq', 'asd', 'qw', 'm@123', 1121, '123', 'Officer'),
-(7, 'qwer43', 'Mevan', 'Karunanayake', 'm@123', 123, '123', 'Officer');
+INSERT INTO `user_accounts` (`user_id`, `user_name`, `first_name`, `last_name`, `email`, `emp_id`, `pwd`, `access_level`, `account_state`) VALUES
+(1, 'admin', 'First', 'Last', 'abc@gmail.com', 1, 'admin', 'Admin', 1),
+(8, 'officer', 'Second', 'Third', 'oficer@123', 10, 'SHA(qwert)', 'Officer', 1),
+(9, 'asd', 'ajda', 'asdkj', 'm@123', 111, '$1$JE1.eA2.$Wvsi4dhme39oaWXXJeExW1', 'Officer', 0),
+(10, 'zxc', 'asda', 'sasd', '100@123', 14, '19b58543c85b97c5498edfd89c11c3aa8cb5fe51', 'Officer', 0),
+(11, 'mevan', 'First', 'Last', '100@123', 100, 'f10e2821bbbea527ea02200352313bc059445190', 'Officer', 0),
+(12, 'asd123', 'asda', 'adas', '123@123', 12, 'f10e2821bbbea527ea02200352313bc059445190', 'Officer', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `assesment_tax_bills`
+--
+ALTER TABLE `assesment_tax_bills`
+  ADD PRIMARY KEY (`bill_no`);
 
 --
 -- Indexes for table `assesment_tax_detail`
@@ -134,6 +177,12 @@ ALTER TABLE `assesment_tax_detail`
 --
 ALTER TABLE `policies`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shop_rental_bills`
+--
+ALTER TABLE `shop_rental_bills`
+  ADD PRIMARY KEY (`bill_no`);
 
 --
 -- Indexes for table `shop_rental_detail`
@@ -159,24 +208,30 @@ ALTER TABLE `user_accounts`
 --
 
 --
+-- AUTO_INCREMENT for table `assesment_tax_bills`
+--
+ALTER TABLE `assesment_tax_bills`
+  MODIFY `bill_no` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `shop_rental_bills`
+--
+ALTER TABLE `shop_rental_bills`
+  MODIFY `bill_no` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 DELIMITER $$
 --
 -- Events
 --
-DROP EVENT `update_arrears_assesment_tax`$$
 CREATE DEFINER=`root`@`localhost` EVENT `update_arrears_assesment_tax` ON SCHEDULE EVERY 1 YEAR STARTS '2017-07-16 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE assesment_tax_detail SET arrears = arrears + current_bal$$
 
-DROP EVENT `update_current_balance_assesment_tax`$$
 CREATE DEFINER=`root`@`localhost` EVENT `update_current_balance_assesment_tax` ON SCHEDULE EVERY 1 QUARTER STARTS '2017-07-01 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE assesment_tax_detail SET current_bal = current_bal + (annual_tax/4)$$
 
-DROP EVENT `update_arrears_shop_rental`$$
 CREATE DEFINER=`root`@`localhost` EVENT `update_arrears_shop_rental` ON SCHEDULE EVERY 1 MONTH STARTS '2017-07-11 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE shop_rental_detail SET arrears = arrears + monthly_rental$$
 
-DROP EVENT `update_fines_shop_rental`$$
 CREATE DEFINER=`root`@`localhost` EVENT `update_fines_shop_rental` ON SCHEDULE EVERY 1 MONTH STARTS '2017-07-11 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE shop_rental_detail
 SET fines = fines + monthly_rental *(SELECT shop_rental_fine_rate FROM policies WHERE id=1)/100 WHERE arrears>0$$
 
