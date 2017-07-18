@@ -1,0 +1,49 @@
+<div id="NavBar"> 
+	<nav>
+		<ul>
+			<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Home </a></li>
+			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
+            	<div class="DropDwnCntnt">
+                <ul class="DrpLst">
+            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
+                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
+                    <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
+                </ul>
+                </div>
+            </li>
+			<li class="DropDwnElmnt"> <a href="#"> Reports </a>  
+            <div class="DropDwnCntnt">
+            <ul class="DrpLst">
+            	<li class="DropDwnElmnt"> <a href="#"> Assesment Tax <span> </span></a> 
+                <div class="submenu">
+            	<ul class="DrpLst">
+            		<li> <a href="DailyReportTaxOfficer.php? <?php echo SID;?>"> Daily Report </a> </li>
+                	<li> <a href="MonthlyReportTaxOfficer.php? <?php echo SID;?>"> Monthly Report </a> </li>
+                    <li> <a href="QuarterReportOfficer.php? <?php echo SID;?>"> Quartar Report </a> </li>
+                    <li> <a href="TaxCustomReportOfficer.php? <?php echo SID;?>"> Tax Payer Report </a> </li>
+            	</ul>
+                </div>
+                </li>
+                <li class="DropDwnElmnt"> <a href="#"> Shop Rental <span> </span></a>
+                <div class="submenu">
+            	<ul class="DrpLst">
+            		<li> <a href="MonthlyReportRentalOfficer.php? <?php echo SID;?>"> Monthly Report </a> </li>
+                	<li> <a href="RentalCustomReportOfficer.php? <?php echo SID;?>"> Rental Payer Report </a> </li>	
+            	</ul>
+                </div>
+                </li>
+            </ul>
+            </div> 
+            </li>
+            <li class="DropDwnElmnt"> <a href="OfficerViewPolicies.php? <?php echo SID; ?>"> View Policies </a></li>
+           	<li class="DropDwnElmnt"> <a href="#"> Account </a> 
+            <div class="DropDwnCntnt">
+            <ul class="DrpLst">
+            	<li> <a href="#"> Edit Account </a> </li>
+                <li> <a href="LogOut.php? <?php echo SID; ?>"> Logout </a> </li>
+            </ul>
+            </div>
+            </li>
+		</ul>
+	</nav>
+</div>
