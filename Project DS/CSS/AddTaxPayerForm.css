@@ -1,62 +1,3 @@
-@charset "utf-8";
-/* CSS Document */
-	
-#Content {
-	-webkit-filter: blur(20px);
-}
-
-#PageHeading{
-	margin-top:10px;
-	height:auto;
-	margin-bottom:10px;
-	background-color:rgba(243,243,246,0.5);
-	border-radius:2%;
-}
-
-h3 {
-	font-family:Arial, Helvetica, sans-serif;
-	color:#F00;
-	margin-left:65px;
-	font-size:16px;
-}
-
-h1 {
-	font-family:Arial, Helvetica, sans-serif;
-	color:#009;
-	font-weight:500;
-	font-size:40px;
-	margin-left:10px;
-	text-align:center;
-}
-
-h2 {
-	font-family:Arial, Helvetica, sans-serif;
-	color:#000;
-	font-weight:lighter;
-	font-size:20px;
-	margin-left:10px;
-	padding-bottom:12px;
-}
-
-#Message {
-	width:300px;
-	float:left;
-	border:thin;
-	border-color:#00F;
-}
-
-#Detail {
-	height:500px;
-}
-
-#Detail #DetailHeader {
-	padding-left:55px;
-}
-
-a {
-	color:#09F;
-}
-
 .AddFormLabel {
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:16px;
@@ -86,113 +27,55 @@ select {
 }
 
 #BtnSubmit {
+	font-size:16px;
 	margin-left:75px;
+	text-align:center;
+	width:100px;
+	border-radius:4px;
+	background-color:#009;
+	color:#FFF;
+	line-height:25px;
+	height:30px;
 }
 
 #BtnCancel {
+	font-size:16px;
 	margin-left:140px;
+	text-align:center;
+	width:80px;
+	position:absolute;
+	border-radius:4px;
+	background-color:#009;
+	color:#FFF;
+	line-height:25px;
+	height:30px;
 }
 
 #BtnConfirm {
-	margin-left:20px;
-}
-
-#Detail{
-  position: relative;
-  margin:auto;
-  width: 600px;
-  background: rgba(130,130,130,.3);
-  padding: 20px 22px;
-  border: 1px solid;
-  border-top-color: rgba(255,255,255,.4);
-  border-left-color: rgba(255,255,255,.4);
-  border-bottom-color: rgba(60,60,60,.4);
-  border-right-color: rgba(60,60,60,.4);
-}
-
-form input {
-	width:200px;
-}
-
-form table {
-	margin:auto;
-}
-
-form input, form button, form textarea{
-	border-radius:4px;
-	background-color: rgba(255,255,255,0.4);
-
-	box-shadow: 0 0 25px rgba(0,0,0,0.1),inset 0 0 6px rgba(69,69,69,0.6);
-  border: 1px solid;
-  border-bottom-color: rgba(255,255,255,.5);
-  border-right-color: rgba(60,60,60,.35);
-  border-top-color: rgba(60,60,60,.35);
-  border-left-color: rgba(80,80,80,.45);
-  background-repeat: no-repeat;
-  font-family:Arial, sans-serif;
-  letter-spacing: .075em;
-  color:#000;
-  text-shadow: 0 1px 0 rgba(0,0,0,.1);
-}
-
-form select {
-	border-radius:4px;
-	background-color: rgba(255,255,255,0.4);
-
-	box-shadow: 0 0 25px rgba(0,0,0,0.1),inset 0 0 6px rgba(69,69,69,0.6);
-  border-bottom-color: rgba(255,255,255,.5);
-  border-right-color: rgba(60,60,60,.35);
-  border-top-color: rgba(60,60,60,.35);
-  border-left-color: rgba(80,80,80,.45);
-  background-repeat: no-repeat;
-  font-family:Arial, sans-serif;
-  letter-spacing: .075em;
-  color:#000;
-  text-shadow: 0 1px 0 rgba(0,0,0,.1);
-}
-
-form input:focus {
-color:Black;  
-background-color: rgba(255,255,255,1);
- }
- 
-form textarea:focus {
-color:Black;  
-background-color: rgba(255,255,255,1);
- }
-
-input::placeholder {
-  color: white;
-}
-
-.warningMsg {
-	margin-left:20px;
-}
-
-
-form button[type=submit] {
-	line-height:normal;
-	height:30px;
 	font-size:16px;
-	margin:auto;
-	position:relative;
+	margin-left:20px;
 	text-align:center;
-  	width: 120px;
-  	margin-bottom: 0;
-  	color:white;
-  	letter-spacing: .05em;
-  	text-shadow: 0 1px 0 #133d3e;
-  	background:linear-gradient(0deg,rgba(21,99,151,0.8),rgba(64,161,226,0.8),rgba(8,70,111,0.9));
-  	border-top-color: #9fb5b5;
-  	border-left-color: #608586;
-  	border-bottom-color: #1b4849;
-  	border-right-color: #1e4d4e;
-  	cursor: pointer;
-  	text-shadow:1px 1px 5px;
+	width:80px;
+	position:absolute;
+	border-radius:4px;
+	background-color:#009;
+	color:#FFF;
+	line-height:25px;
+	height:30px;
 }
-button:hover{opacity:0.6;}
-label{
-	color:white; 
-	font-weight:bolder;
-	font-size:14px;
+
+	
+#BtnSubmit:hover {
+	background-color:#999;
+	color:#009;
+}
+
+#BtnCancel:hover {
+	background-color:#999;
+	color:#009;
+}
+
+#BtnConfirm:hover {
+	background-color:#999;
+	color:#009;
 }

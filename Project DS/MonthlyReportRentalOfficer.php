@@ -1,6 +1,6 @@
 
 <?php
-	require_once("access_officer.php");
+	//require_once("access_officer.php");
 	$i=0;
 	$amount=0;
 	$bool=false;
@@ -32,8 +32,9 @@
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
-            		<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
-                	<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Shop Tax </a> </li>
+            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
+                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
+                    <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
                 </ul>
                 </div>
             </li>

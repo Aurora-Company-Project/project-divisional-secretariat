@@ -1,5 +1,5 @@
 <?php
-	require_once("access_officer.php");
+	//require_once("access_officer.php");
 	$i=0;
 	$bool=false;
 	if(isset($_POST['generate'])){
@@ -18,6 +18,7 @@
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Report.css" rel="stylesheet"  type="text/css" />
 <link href="CSS/table.css" rel="stylesheet"  type="text/css" />
+
 <title>Home</title>
 </head>
 <body>
@@ -30,8 +31,9 @@
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
-            		<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
-                	<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Shop Tax </a> </li>
+            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
+                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
+                    <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
                 </ul>
                 </div>
             </li>

@@ -1,11 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-#Content {
-	min-height:700px;
-	clear:both;
-	overflow:auto;
-	background-image:url(../images/AdminWelcom.jpg);
-}
+
 h3 {
 	font-family:Arial, Helvetica, sans-serif;
 	color:#F00;
