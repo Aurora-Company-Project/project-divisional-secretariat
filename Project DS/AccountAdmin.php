@@ -95,20 +95,20 @@
 		echo '<table>';
 		echo '<tr>';
 		echo '<th width="50" height="50"> Employee ID </th>';
-		echo '<th width="250"> Name </th>';
-		echo '<th width="150"> </th>';
+		echo '<th width="150"> Name </th>';
+		echo '<th width="100"> </th>';
 		echo '</tr>';
 		echo '<tr>';
 		echo '<td width="50" height="35">'. $user['emp_id']. '</td>';
-		echo '<td width="250">' .$user['first_name'].' '.$user['last_name']. '</td>';
-		echo '<td width="150"><a href="confirm.php?user_id='.$user_id.'">Confirm</a> </td>';
+		echo '<td width="150">' .$user['first_name'].' '.$user['last_name']. '</td>';
+		echo '<td width="100"><a href="confirm.php?user_id='.$user_id.'">Confirm</a> </td>';
 		echo '</tr>';
 		while ($user = mysqli_fetch_array($result)) {
 			$user_id=$user['user_id']; 
 			echo '<tr>';
 			echo '<td width="50" height="35">'. $user['emp_id']. '</td>';
-			echo '<td width="250">'.$user['first_name'].' '.$user['last_name'].'</td>';
-			echo '<td width="150"><a href="confirm.php?user_id='.$user_id.'">Confirm</a> </td>';
+			echo '<td width="150">'.$user['first_name'].' '.$user['last_name'].'</td>';
+			echo '<td width="100"><a href="confirm.php?user_id='.$user_id.'">Confirm</a> </td>';
 			echo '</tr>';
 		}
 		echo '</table>';

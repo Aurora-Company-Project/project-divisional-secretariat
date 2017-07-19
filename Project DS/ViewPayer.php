@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
-<link href="CSS/OfficerHome.css" rel="stylesheet" type="text/css" />
+<link href="CSS/ViewPayer.css" rel="stylesheet" type="text/css" />
 <title>Home</title>
 </head>
 <body>
@@ -65,76 +65,90 @@
 </div>
 <div id="Content"> 
 <div id="PageHeading">
-<h1>Welcome! <?php echo "$first_name " ."$last_name" ?> </h1>
+<h1>Tax/Rental Payer Profile</h1>
 </div>
 <div id="Notifications">
-<h2>Notifications</h2>
-<h3> Assesment Tax </h3>
-<?php
-	$notification_query = "SELECT * FROM assesment_tax_detail WHERE arrears >=".
-							" annual_tax * 5";
-	$result = database_query($notification_query);
-	if (!($customer = mysqli_fetch_array($result))){
-		echo '<h4> No New Notifications! </h4>';
-	} else {
-		echo '<table>';
+<?php 
+	if (isset($_GET['type'])){
+	if($_GET['type']=='T') {
+		$id = $_GET['id'];
+		$query = "SELECT * FROM assesment_tax_detail WHERE id = '$id'";
+		$result = database_query($query);
+		$row = mysqli_fetch_array($result);
+		echo '<table align="center">';
 		echo '<tr>';
-		echo '<th width="100" height="30"> Tax Payer ID </th>';
-		echo '<th width="150"> Tax Payer Name </th>';
-		echo '<th width="100"> Total Arrears </th>';
-		echo '<th width="100"> </th>';
+		echo '<td width="150"> Owner Name </td>';
+		echo '<td width="10" align="center">: </td>';
+		echo '<td width="150">'.$row['owner_name'].'</td>';
 		echo '</tr>';
 		echo '<tr>';
-		echo '<td align="center" width="100" height="25">'. $customer['id']. '</td>';
-		echo '<td align="center" width="150">' .$customer['owner_name'] . '</td>';
-		echo '<td align="center" width="100">' .$customer['arrears']. '</td>';
-		echo '<td align="center" width="100"><a href="ViewPayer.php?type=T&id='.$customer['id'].'">View Details</a> </td>';
+		echo '<td width="150"> Address </td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['address'].'</td>';
 		echo '</tr>';
-		while ($customer = mysqli_fetch_array($result)) {
-			echo '<tr>';
-			echo '<td align="center" width="100" height="25">'. $customer['id']. '</td>';
-			echo '<td align="center" width="150">' .$customer['owner_name'] . '</td>';
-			echo '<td align="center" width="100">' .$customer['arrears']. '</td>';
-			echo '<td align="center" width="100"><a href="ViewPayer.php?type=T&id='.$customer['id'].'"></a></td>';
-			echo '</tr>';
-			
-		}
+		echo '<tr>';
+		echo '<td width="150"> Tax Payer ID </td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['id'].' </td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td width="150">Property Detail</td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['annual_tax'].' </td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td width="150">Annual Tax(Rs.)</td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['annual_tax'].' </td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td width="150"> Total Arrears(Rs.)</td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['arrears']. '</td>';
+		echo '</tr>';
+		echo '</table>';
+	} elseif ($_GET['type']=='R') {
+		$id = $_GET['id'];
+		$query = "SELECT * FROM shop_rental_detail WHERE id = $id";
+		$result = database_query($query);
+		$row = mysqli_fetch_array($result);
+		echo '<table align="center">';
+		echo '<tr>';
+		echo '<td width="150"> Owner Name </td>';
+		echo '<td width="10" align="center">: </td>';
+		echo '<td width="150">'.$row['owner_name'].'</td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td width="150"> Owner Address </td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['owner_address'].'</td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td width="150"> Shop Address </td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['shop_address'].' </td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td width="150">Shop ID</td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['id'].' </td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td width="150">Monthly Rental</td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['monthly_rental'].' </td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td width="150"> Total Arrears(Rs.)</td>';
+		echo '<td width="10" align="center"> :</td>';
+		echo '<td width="150">'.$row['arrears']. '</td>';
+		echo '</tr>';
 		echo '</table>';
 	}
-?>
-<h3> Shop Rental </h3>
-<?php
-	$notification_query = "SELECT * FROM shop_rental_detail WHERE arrears >=".
-							" monthly_rental";
-	$result = database_query($notification_query);
-	if (!($customer = mysqli_fetch_array($result))){
-		echo '<h4> No New Notifications! </h4>';
-	} else {
-		echo '<table>';
-		echo '<tr>';
-		echo '<th width="100" height="30"> Shop ID </th>';
-		echo '<th width="150"> Owner Name </th>';
-		echo '<th width="100"> Total Arrears </th>';
-		echo '<th width="100"> </th>';
-		echo '</tr>';
-		echo '<tr>';
-		echo '<td align="center" width="100" height="25">'. $customer['id']. '</td>';
-		echo '<td align="center" width="150">' .$customer['owner_name'] . '</td>';
-		echo '<td align="center" width="100">' .$customer['arrears']. '</td>';
-		echo '<td align="center" width="100"><a href="ViewPayer.php?type=R&id='.$customer['id'].'">View Details</a> </td>';
-		echo '</tr>';
-		while ($customer = mysqli_fetch_array($result)) {
-			echo '<tr>';
-			echo '<td align="center" width="100" height="25">'. $customer['id']. '</td>';
-			echo '<td align="center" width="150">' .$customer['owner_name'] . '</td>';
-			echo '<td align="center" width="100">' .$customer['arrears']. '</td>';
-			echo '<td align="center" width="100"><a href="ViewPayer.php?type=R&id='.$customer['id'].'">View Details</a> </td>';
-			echo '</tr>';	
-		}
-		echo '</table>';
 	}
-?>
-
+	
+	?>
+<h2></h2>
 </div>
 </div>
 <footer

@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/Success.css" rel="stylesheet" type="text/css" />
 <title>Successfull!</title>
 </head>
 <body>
@@ -76,7 +77,9 @@
 </div>
 <div id="Content"> 
 <div id="PageHeading">
-<h1>Account Created Succesfully!</h1>
+<h1>Registration Successfull!</h1>
+</div>
+<div id ="Detail">
 </div>
 <footer
 <p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />

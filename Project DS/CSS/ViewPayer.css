@@ -22,9 +22,9 @@ table th {
 }
 
 table td{
-	color:#3FF;
-	font-size:14px;
-	text-align:center;
+	color:#FFF;
+	font-size:18px;
+	min-height:25px;
 }
 
 table a {
@@ -40,6 +40,7 @@ table a {
 table {
 	margin-left:30px;
 }
+	
 
 h1 {
 	font-family:Arial, Helvetica, sans-serif;
@@ -47,6 +48,7 @@ h1 {
 	font-weight:500;
 	font-size:40px;
 	margin-left:10px;
+	text-align:center;
 }
 
 h2 {
@@ -62,7 +64,7 @@ h2 {
 	min-height:200px;
   	position:relative;
   	margin:auto;
-  	width:700px;
+  	width:600px;
   	background: rgba(130,130,130,.3);
   	padding: 20px 22px;
   	border: 1px solid;

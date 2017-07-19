@@ -7,6 +7,9 @@
 	} else{
 		$message = $_SESSION['error'];
 	}
+	if (isset($_POST['register'])){
+		header("Location: SignUp.php");
+	}
 	if(isset($_POST['login'])){
 		require_once('connect_database.php');
 		$user_name = $_POST['username'];
@@ -45,7 +48,7 @@
 		<div id="bg"></div>
 	
 	<div class="bgimage">
-	<form class="memberLoginForm" method="POST" action="index.php" autocomplete="off">
+	<form class="memberLoginForm" method="POST" action="Login.php" autocomplete="off" id="loginform" name="loginform">
 
         <h2 align="center">LOGIN FORM</h2>
         <div class="imgcontainer"><img src="images/user_icon.jpg" alt="" class="loginimge"/></div>
@@ -54,12 +57,12 @@
 			echo '<img class="warImg" src="images/warning.gif" height="25px" width="25px"/>'; 
 			echo '       '.$message ; ?></span><br/>
             <label for="user"><b>Username</b></label><br />
-            <input class="user" name="uname" type="text" placeholder="Enter Username" required autofocus/><br />
+            <input class="user" name="username" type="text" placeholder="Enter Username" autofocus/><br />
             <label for="psw"><b>Password</b></label><br />
-            <input class="psw" name="Psw" type="password" placeholder="Enter Password" required/>
+            <input class="psw" name="pswrd" type="password" placeholder="Enter Password"/>
 			<a class="forgetLink" href=""> Forgot your password?</a> <br/> <br/>
-            <button class="subBtn" name="SubmitBotton" type="submit">Login</button><br /><br />
-            <button class="subBtn" name="Button" type="submit">Register</button>
+            <button class="subBtn" name="login" type="submit" form="loginform">Login</button><br /><br />
+           	<button class="subBtn" name="register" type="submit" form="loginform">Register</button>
 
         </div>
     </form>
