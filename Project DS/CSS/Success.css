@@ -1,0 +1,36 @@
+#PageHeading{
+	margin-top:10px;
+	height:auto;
+	margin-bottom:10px;
+	background-color:rgba(243,243,246,0.5);
+	border-radius:2%;
+}
+
+h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#F00;
+	margin-left:65px;
+	font-size:16px;
+}
+
+h1 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#009;
+	font-weight:500;
+	font-size:40px;
+	margin-left:10px;
+	text-align:center;
+}
+
+h2 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#000;
+	font-weight:lighter;
+	font-size:20px;
+	margin-left:10px;
+	padding-bottom:12px;
+}
+
+a {
+	color:#09F;
+}
