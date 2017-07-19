@@ -1,15 +1,15 @@
 <?php
-	//require_once("access_officer.php");
+	require_once("access_officer.php");
 	require('connect_database.php');
 		//$id = $_GET['link'];
-		$id= "rl25";
+		$id=$_POST['id'];
 		$query= "select * FROM assesment_tax_detail WHERE id= '$id'";
 		$detail = mysqli_fetch_array(database_query($query));
 		$query_bill = "select * FROM assesment_tax_bills WHERE id= '$id'";
 		$detail_bill = mysqli_fetch_array(database_query($query_bill));
 		$arrears = $detail['arrears'];
-		$date=$detail_bill['date'];
-		$amount = $detail_bill['payment'];
+		$date=$detail_bill['date_time'];
+		$amount = $detail_bill['payement'];
 		$bill_no = $detail_bill['bill_no'];
 		if($detail['arrears']==0){		
 			if(($amount>= $detail['annual_tax']) && (date("m",strtotime($date))<=1 && date("d",strtotime($date))== 10))
@@ -36,6 +36,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/Assespay1.css" rel="stylesheet" type="text/css" />
 <title>Home</title>
 <style type="text/css">
 	table {; alignment-baseline:middle ; position:absolute ;}
@@ -53,8 +54,9 @@
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
-            		<li> <a href="#"> Assesment Tax </a> </li>
-                	<li> <a href="#"> Shop Tax </a> </li>
+            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
+                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
+                    <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
                 </ul>
                 </div>
             </li>
@@ -64,29 +66,30 @@
             	<li class="DropDwnElmnt"> <a href="#"> Assesment Tax <span> </span></a> 
                 <div class="submenu">
             	<ul class="DrpLst">
-            		<li> <a href="#"> Daily Report </a> </li>
-                	<li> <a href="#"> Quartar Report </a> </li>
-                    <li> <a href="#"> Tax Payer Report </a> </li>
+            		<li> <a href="DailyReportTaxOfficer.php? <?php echo SID;?>"> Daily Report </a> </li>
+                	<li> <a href="MonthlyReportTaxOfficer.php? <?php echo SID;?>"> Monthly Report </a> </li>
+                    <li> <a href="QuarterReportOfficer.php? <?php echo SID;?>"> Quartar Report </a> </li>
+                    <li> <a href="TaxCustomReportOfficer.php? <?php echo SID;?>"> Tax Payer Report </a> </li>
             	</ul>
                 </div>
                 </li>
                 <li class="DropDwnElmnt"> <a href="#"> Shop Rental <span> </span></a>
                 <div class="submenu">
             	<ul class="DrpLst">
-            		<li> <a href="#"> Monthly Report </a> </li>
-                	<li> <a href="#"> Rental Payer Report </a> </li>	
+            		<li> <a href="MonthlyReportRentalOfficer.php? <?php echo SID;?>"> Monthly Report </a> </li>
+                	<li> <a href="RentalCustomReportOfficer.php? <?php echo SID;?>"> Rental Payer Report </a> </li>	
             	</ul>
                 </div>
                 </li>
             </ul>
             </div> 
             </li>
-            <li class="DropDwnElmnt"> <a href="ViewPolicies.php? <?php echo SID; ?>"> View Policies </a></li>
+            <li class="DropDwnElmnt"> <a href="OfficerViewPolicies.php? <?php echo SID; ?>"> View Policies </a></li>
            	<li class="DropDwnElmnt"> <a href="#"> Account </a> 
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="#"> Edit Account </a> </li>
-                <li> <a href="#"> Logout </a> </li>
+                <li> <a href="LogOut.php? <?php echo SID; ?>"> Logout </a> </li>
             </ul>
             </div>
             </li>
@@ -99,8 +102,10 @@
 </div>
 <div id= "detail">
 	
-<form action="Assespay1.php" method="post" id="APayForm2">
-<table align="center">
+<form action="Assespay1.php" method="post" id="APayForm2" >
+
+<table id= "tb" align="center">
+<caption>Assesment Tax pay Sheet</caption>
     <tr> <td>
     <label for="owner_name"> Owner Name </label>
         </td><td> 
@@ -137,7 +142,7 @@
 	<input readonly="readonly" type="text" id="bill_no" name="bill_no" value="<?= $bill_no ?>"/> <br/>
 		</td></tr>
     	<tr><td>
-    <button type="submit" form="PayForm" name="print" > Print </button>
+    <button type="submit"  name="print" > Print </button>
     	</td></tr>
 </table>
 </form>

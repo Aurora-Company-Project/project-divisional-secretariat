@@ -1,49 +1,34 @@
 <?php
-	require_once("access_officer.php");
-		$id = $_GET['link'];
-		
-		require_once('connect_database.php');
-		$query= "select * FROM shop_rental_detail WHERE id= $id";
+	//require_once("access_officer.php");
+	require('connect_database.php');
+		//$id = $_GET['link'];
+		$id=$_POST['id'];
+		$query= "select * FROM assesment_tax_detail WHERE id= '$id'";
 		$detail = mysqli_fetch_array(database_query($query));
-		
-		$tot_arrears=$detail['arrears']+$detail['fines']; 
-		
-		if(isset($_POST['Paid']))
-		{
-			if(($_POST['amount'])<0)
+		$query_bill = "select * FROM assesment_tax_bills WHERE id= '$id'";
+		$detail_bill = mysqli_fetch_array(database_query($query_bill));
+		$arrears = $detail['arrears'];
+		$date=$detail_bill['date_time'];
+		$amount = $detail_bill['payement'];
+		$bill_no = $detail_bill['bill_no'];
+		if($detail['arrears']==0){		
+			if(($amount>= $detail['annual_tax']) && (date("m",strtotime($date))<=1 && date("d",strtotime($date))== 10))
 			{
-				header("Location: OfficerSearchAssesmentTaxPayer.php");
-				
-				}
-			
-			elseif(is_numeric($_POST['amount']))
+				$discount = 0.1*$detail['annual_tax'];
+			}
+			elseif ($amount>= ($detail['annual_tax']/4))
 			{
-				$payment=$_POST['amount'];				
-				$date_time=date('Y-m-d H:i:s');	
-				$query_submit = "INSERT INTO shop_rental_bills(customer_id , date_time , payment) VALUES ($id,'$date_time',$payment)" ;						
-				database_query($query_submit);				
-				
-				$query_bill="SELECT * FROM shop_rental_bills WHERE customer_id= $id";
-				$detail_bill = mysqli_fetch_array(database_query($query_bill));
-				$paid=$detail_bill['payment'];
-				$bill_no=$detail_bill['bill_no'];
-				
-				
-				
-				
-				
-				header("Location: Rentpay1.php");
+			}if ((date("d",strtotime($date))&& (date("m",strtotime($date))==1)) || (date("d",strtotime($date))&& date("m",strtotime($date))) || (date("d",strtotime($date))&& date("m",strtotime($date))) || (date("d",strtotime($date))&& date("m",strtotime($date))))
+				{
+					$discount = 0.05*$detail['annual_tax'];
+				} 
 			}
 			else
 			{
-				$message="Enter possible value for amount";
+			$discount = 0;
 			}
+	if(isset($_POST['print'])){
 		}
-		if(isset($_POST['cancel'])){
-			
-			header("Location: OfficerSearchAssesmentTaxPayer.php");
-		}
-		
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -51,7 +36,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
-<link href="CSS/Rentpay.css" rel="stylesheet" type="text/css" />
+<link href="CSS/Assespay1.css" rel="stylesheet" type="text/css" />
 <title>Home</title>
 <style type="text/css">
 	table {; alignment-baseline:middle ; position:absolute ;}
@@ -115,43 +100,54 @@
 <div id="PageHeading">
 
 </div>
-<div id="Message">
-</div>
-<div id="Detail">
-<form  action="Rentpay1.php" method="post" id="RPayForm">
-<table id="tb"> 
-<caption>Shop Rental Payment</caption>
-	<tr> <td>
-<label for="owner_name"> Owner Name </label>
-	</td><td> 
-<input type="text" id="ownername" name="ownername" value="<?= $detail['owner_name'] ?>" /> <br />
-	</td></tr>
-    <tr> <td>
-<label for="id"> ID </label> 
-	</td><td>
-<input type="number" id="id" name="id" value="<?= $id ?>" /> <br />
-	</td></tr>
-    
-    <tr> <td>
-<label for="bill_no"> Bill_No </label> 
-	</td><td>
-<input type="number" id="bill_no" name="bill_no" value="<?php if (isset($detail_bill['bill_no'])) echo $detail_bill['bill_no']; ?>" /> <br />
-	</td></tr>
+<div id= "detail">
 	
+<form action="Assespay1.php" method="post" id="APayForm2" >
 
+<table id= "tb" align="center">
+<caption>Assesment Tax pay Sheet</caption>
     <tr> <td>
-<label for="amount"> Paid Amount </label> 
-	</td><td>
-<input type="text"  id="amount" name="amount"  value=""/> <br/>
-	</td></tr>    
-	<tr> <td>
-<button type="submit"  name="Paid" > Submit </button>
-<button type="submit"  name="close" > Cancel </button>
-	</td></tr>
+    <label for="owner_name"> Owner Name </label>
+        </td><td> 
+    <input readonly="readonly" type="text" id="ownername" name="ownername" value="<?=$detail['owner_name'] ?>" /> <br />
+        </td></tr>
+        <tr> <td>
+    <label for="id"> ID </label> 
+        </td><td>
+    <input readonly="readonly" type="text" id="id" name="id" value="<?=$detail['id']; ?>"/> <br />
+        </td></tr>
+        <tr> <td>
+    <label for="address"> Address </label> 
+        </td><td>
+    <input readonly="readonly" type="text" id="address" name="address" value="<?=$detail['address'] ?>"/> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="arrears"> Arrears </label> 
+        </td><td>
+    <input readonly="readonly" type="number" id="arrears" name="arrears" value="<?= $detail['arrears'] ?>" /> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="amount"> Paid Amount </label> 
+        </td><td>
+    <input readonly="readonly" type="text"  id="amount" name="amount"  value="<?= $amount?>"/> <br/>
+        </td></tr>
+        <tr> <td>
+    <label for="discount"> Discount </label> 
+        </td><td>
+    <input readonly="readonly" type="text" id="discount" name="discount" value= "<?= $discount?>" /> <br />
+        </td></tr>
+         <tr> <td>
+	<label for="bill_no"> Bill_No: </label> 
+		</td><td>
+	<input readonly="readonly" type="text" id="bill_no" name="bill_no" value="<?= $bill_no ?>"/> <br/>
+		</td></tr>
+    	<tr><td>
+    <button type="submit"  name="print" > Print </button>
+    	</td></tr>
 </table>
 </form>
 </div>
-
+</div>
 </div>
 <div id="footer"></div>
 </div>

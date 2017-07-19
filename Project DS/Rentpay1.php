@@ -1,9 +1,9 @@
 <?php
-	require_once("access_officer.php");
+	//require_once("access_officer.php");
 	require('connect_database.php');
 		echo "Desh";
 		$id=$_POST['id'];
-		
+		//$id= "rl25";
 		$query= "select * FROM shop_rental_detail WHERE id= $id";
 		$detail = mysqli_fetch_array(database_query($query));
 		$query2 = "select * FROM shop_rental_bills WHERE customer_id= '$id'";
@@ -36,9 +36,8 @@
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
-            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
-                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
-                    <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
+            		<li> <a href="#"> Assesment Tax </a> </li>
+                	<li> <a href="#"> Shop Tax </a> </li>
                 </ul>
                 </div>
             </li>
@@ -48,30 +47,29 @@
             	<li class="DropDwnElmnt"> <a href="#"> Assesment Tax <span> </span></a> 
                 <div class="submenu">
             	<ul class="DrpLst">
-            		<li> <a href="DailyReportTaxOfficer.php? <?php echo SID;?>"> Daily Report </a> </li>
-                	<li> <a href="MonthlyReportTaxOfficer.php? <?php echo SID;?>"> Monthly Report </a> </li>
-                    <li> <a href="QuarterReportOfficer.php? <?php echo SID;?>"> Quartar Report </a> </li>
-                    <li> <a href="TaxCustomReportOfficer.php? <?php echo SID;?>"> Tax Payer Report </a> </li>
+            		<li> <a href="#"> Daily Report </a> </li>
+                	<li> <a href="#"> Quartar Report </a> </li>
+                    <li> <a href="#"> Tax Payer Report </a> </li>
             	</ul>
                 </div>
                 </li>
                 <li class="DropDwnElmnt"> <a href="#"> Shop Rental <span> </span></a>
                 <div class="submenu">
             	<ul class="DrpLst">
-            		<li> <a href="MonthlyReportRentalOfficer.php? <?php echo SID;?>"> Monthly Report </a> </li>
-                	<li> <a href="RentalCustomReportOfficer.php? <?php echo SID;?>"> Rental Payer Report </a> </li>	
+            		<li> <a href="#"> Monthly Report </a> </li>
+                	<li> <a href="#"> Rental Payer Report </a> </li>	
             	</ul>
                 </div>
                 </li>
             </ul>
             </div> 
             </li>
-            <li class="DropDwnElmnt"> <a href="OfficerViewPolicies.php? <?php echo SID; ?>"> View Policies </a></li>
+            <li class="DropDwnElmnt"> <a href="ViewPolicies.php? <?php echo SID; ?>"> View Policies </a></li>
            	<li class="DropDwnElmnt"> <a href="#"> Account </a> 
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="#"> Edit Account </a> </li>
-                <li> <a href="LogOut.php? <?php echo SID; ?>"> Logout </a> </li>
+                <li> <a href="#"> Logout </a> </li>
             </ul>
             </div>
             </li>
@@ -86,9 +84,8 @@
 </div>
 <div id="Detail">
 <form action="Rentpay1.php" method="post" id="RPayForm1">
-<table id="tb"> 
-<caption>Rental Payment Sheet</caption>      
-  <tr> <td>
+<table > 
+        <tr> <td>
     <label for="owner_name"> Owner Name </label>
         </td><td> 
     <input  readonly="readonly" type="text" id="ownername" name="ownername" value="<?=$detail['owner_name'] ?>" /> <br />

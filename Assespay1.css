@@ -1,14 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
 
-label{}
-input{}
-button{}
-h4{}
-tr{}
-td{} 
 
-
+table{}	
 form input, form button {
 	border-radius:4px;
 	background-color: rgba(255,255,255,0.4);
@@ -30,20 +24,10 @@ form input, form button {
 }
 
 #tb{
-	
-	alignment-adjust:after-edge;
-	position:absolute
+	position:relative;
 	margin-left:250px;
 	margin-top:200px;
 }
 #tb caption{
 	font-size:50px;
-	}
-	
-#phptb{
-	
-	position:relative;
-	margin:auto;
-	margin-left:300px	
-	margin-bottom: 400px;
 	}
