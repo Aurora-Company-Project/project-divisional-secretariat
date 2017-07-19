@@ -1,7 +1,7 @@
 <?php
-	//require_once("access_officer.php");
-		//$id = $_GET['link'];
-		$id=10;
+	require_once("access_officer.php");
+		$id = $_GET['link'];
+		
 		require_once('connect_database.php');
 		$query= "select * FROM shop_rental_detail WHERE id= $id";
 		$detail = mysqli_fetch_array(database_query($query));

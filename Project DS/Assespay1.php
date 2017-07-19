@@ -1,5 +1,5 @@
 <?php
-	//require_once("access_officer.php");
+	require_once("access_officer.php");
 	require('connect_database.php');
 		//$id = $_GET['link'];
 		$id=$_POST['id'];
