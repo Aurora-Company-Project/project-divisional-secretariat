@@ -12,6 +12,7 @@
 <title>View Policies</title>
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/ViewPolicies.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="Holder">
@@ -23,8 +24,9 @@
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
-            		<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
-                	<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Shop Tax </a> </li>
+            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
+                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
+                    <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
                 </ul>
                 </div>
             </li>
@@ -34,29 +36,30 @@
             	<li class="DropDwnElmnt"> <a href="#"> Assesment Tax <span> </span></a> 
                 <div class="submenu">
             	<ul class="DrpLst">
-            		<li> <a href="#"> Daily Report </a> </li>
-                	<li> <a href="#"> Quartar Report </a> </li>
-                    <li> <a href="#"> Tax Payer Report </a> </li>
+            		<li> <a href="DailyReportTaxOfficer.php? <?php echo SID;?>"> Daily Report </a> </li>
+                	<li> <a href="MonthlyReportTaxOfficer.php? <?php echo SID;?>"> Monthly Report </a> </li>
+                    <li> <a href="QuarterReportOfficer.php? <?php echo SID;?>"> Quartar Report </a> </li>
+                    <li> <a href="TaxCustomReportOfficer.php? <?php echo SID;?>"> Tax Payer Report </a> </li>
             	</ul>
                 </div>
                 </li>
                 <li class="DropDwnElmnt"> <a href="#"> Shop Rental <span> </span></a>
                 <div class="submenu">
             	<ul class="DrpLst">
-            		<li> <a href="#"> Monthly Report </a> </li>
-                	<li> <a href="#"> Rental Payer Report </a> </li>	
+            		<li> <a href="MonthlyReportRentalOfficer.php? <?php echo SID;?>"> Monthly Report </a> </li>
+                	<li> <a href="RentalCustomReportOfficer.php? <?php echo SID;?>"> Rental Payer Report </a> </li>	
             	</ul>
                 </div>
                 </li>
             </ul>
             </div> 
             </li>
-            <li class="DropDwnElmnt"> <a href="ViewPolicies.php? <?php echo SID; ?>"> View Policies </a></li>
+            <li class="DropDwnElmnt"> <a href="OfficerViewPolicies.php? <?php echo SID; ?>"> View Policies </a></li>
            	<li class="DropDwnElmnt"> <a href="#"> Account </a> 
             <div class="DropDwnCntnt">
             <ul class="DrpLst">
             	<li> <a href="#"> Edit Account </a> </li>
-                <li> <a href="#"> Logout </a> </li>
+                <li> <a href="LogOut.php? <?php echo SID; ?>"> Logout </a> </li>
             </ul>
             </div>
             </li>
@@ -67,8 +70,7 @@
 <div id="PageHeading">
     <h1>View Policies<h1>
 </div>	
-<div id="Message">         
-</div>       
+ 
 <div id="Detail">  
     <p><?php echo $row['year'] ?>,Secretary of the Pradeshiya saba is <?php echo $row['secretary_of_the_pradeshiya_saba'] ?>. Currently using Gazettes number is <?php echo $row['gazette_no']?> and the date is <?php echo $row['gazette_date'] ?> </p>
     <h2>Assesment Taxes<h2>
@@ -83,10 +85,10 @@
     </ol>
 </div>
 </div> 
-</div>
 <footer
 <p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
         Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
 </footer>
+</div>
 </body>
 </html>

@@ -9,7 +9,8 @@
 			echo '<th>Owner Name</th>';
 			echo '<th>Owner Address</th>';
 			echo '<th>Shop Address</th>';
-			echo '<th>Annual Tax Value</th>';
+			echo '<th>Tender Value</th>';
+			echo '<th>Monthly Rental</th>';
 			echo '<th>Arrears</th>';
 			echo '<th>Fines</th>';
 			echo '<th></th>';
@@ -40,7 +41,7 @@
 		} 
 		else 
 		{
-			$message="There's no such customer" ;
+			echo "<h3>There's no such customer</h3>"  ;
 		}
 		echo '</table>';
 		return;
@@ -81,6 +82,7 @@
 <title>Search Shop Rental Tax Payer Details</title>
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/Search.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -153,8 +155,6 @@
 <div id="Content">
 <div id="PageHeading">
 <h1>Shop Rental Tax Payer Details</h1>
-</div>
-<div id="Message">
 </div>
 <div id="Detail">
 <h3><?php if(isset($_POST['search'])){echo $message;}?></h3>

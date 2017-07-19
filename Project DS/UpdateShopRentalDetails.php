@@ -1,5 +1,5 @@
 <?php
-	require_once("access_admin.php");
+	//require_once("access_admin.php");
 	include("connect_database.php");
 	$message="";
 	$id=$_GET['link'];
@@ -102,12 +102,8 @@
 <div id="PageHeading">
 <h1>Update Shop Rental Payer</h1>
 </div>
-<div id="Message" >
-<h2> Provide details of the tax payer. </h2>
-<h2> Fill all the data correctly. </h2>
-</div>
 <div id="Detail">
-<h2 class="DetailHeader2"> Shop Rental Payer apply form. </h2>
+<h2> Provide details of the tax payer </h2>
 <h3><?php if(isset($_POST['submit'])){echo $message;}?></h3>
 
 <form  method="post" id="ShopRentalPayerDetail" name="ShopRentalPayerDetail">

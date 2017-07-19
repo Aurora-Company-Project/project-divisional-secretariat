@@ -12,6 +12,7 @@
 <title>View Policies</title>
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/ViewPolicies.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="Holder">
@@ -82,10 +83,7 @@
 <div id="Content">
 <div id="PageHeading">
 <h1>View Policies<h1>
-</div>	
-<div id="Message">
-
-</div>        
+</div>
 <div id="Detail">  
     <p><?php echo $row['year'] ?>,Secretary of the Pradeshiya saba is <?php echo $row['secretary_of_the_pradeshiya_saba'] ?>. Currently using Gazettes number is <?php echo $row['gazette_no']?> and the date is <?php echo $row['gazette_date'] ?> </p>
     <h2>Assesment Taxes<h2>

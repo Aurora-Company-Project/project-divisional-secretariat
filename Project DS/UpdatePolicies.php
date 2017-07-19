@@ -59,6 +59,7 @@
 <title>Update Policies</title>
 	<link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 	<link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+    <link href="CSS/UpdatePolicies.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -131,8 +132,6 @@
 <div id="PageHeading">
 <h1> Update Policies<h1>
 </div>
-<div id="Message">
-</div>
 <div id="Detail">
 <h3><?php if(isset($_POST['update'])){echo $message;}?></h3>	
 <form action="UpdatePolicies.php" id="update_form" name="updateForm" method="post">
@@ -168,7 +167,7 @@
         </tr>
         <tr>
             <td width="250" height="35"> <label for="gazetteDate"> Gazette Date:</label> </td>
-            <td height="25"><input type="text" name="gazetteDate" value="<?=$gazetteDate?>"/> </td>
+            <td height="25"><input type="date" max=(<?php echo date ("Y-m-d")?>) name="gazetteDate" value="<?=$gazetteDate?>"/> </td>
         </tr>			 
      </table>
      <button class="bttn_control" id="Btn" type ="submit" name ="update">Update</button>
@@ -176,11 +175,11 @@
 
 </div>
 </div>
-</div> 
 <footer
 <p style="text-align: center;"> <?php echo (htmlentities("©"));?> Copyright @ 2017 <span id="client">BEMMULLA SUBOFFICE OF ATTANAGALLA PRADESHIYA SABAWA</span><br />
         Designed by <span id="company">AURORA SOFTWARE DEVOLOPERS</span><br /> Contact: +94774454613 <br /> email: aurorasoftdevoloper@gmail.com</p>
 </footer>
+</div>
 </body>
 </body>
 </html>

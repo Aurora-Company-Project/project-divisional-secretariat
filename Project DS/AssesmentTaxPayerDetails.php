@@ -51,10 +51,10 @@
 	} 
 		else 
 		{
-			$message="There's no such customer" ;
+			echo "<h3>There's no such customer</h3>" ;
 		}
 		echo '</table>';
-		return;
+		
 	}
 	?>
 <?php
@@ -71,7 +71,7 @@
 		$customerNameAndLaneQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND lane='$lane'";
 		$assesmentNoAndCustomerNameQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND assesment_no='$assesmentNumber'";
 		$assesmentNoLaneAndCustomerNameQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND assesment_no='$assesmentNumber' AND lane='$lane'";
-		if((!(is_numeric($assesmentNumber))&& !empty($assesmentNumber)) || ((is_numeric($customerName))&& !empty($customerName) ))
+		if((!(is_numeric($assesmentNumber))&& !empty($assesmentNumber)) || ($assesmentNumber<=0)|| ((is_numeric($customerName))&& !empty($customerName) ))
 		{
 			$message="Enter Valid Details";
 		}
@@ -94,6 +94,7 @@
 
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/Search.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -167,8 +168,6 @@
 <div id="PageHeading">
 <h1>Assesment Tax Payer Details</h1>
 </div>
-<div id="Message">
-</div>
 <div id="Detail">
 	<h3><?php if(isset($_POST['search'])){echo $message;}?></h3>
 	<form action="AssesmentTaxPayerDetails.php" id="detail_form" name="detailForm" method="POST">
@@ -214,6 +213,7 @@
 			}
 			elseif(empty($assesmentNumber)&& ($lane!='none') && empty($customerName))
 			{
+				echo"huu";
 				whileloop(database_query($laneQuery));
 			}
 			elseif(empty($assesmentNumber)&&($lane=='none') && !(empty($customerName)))

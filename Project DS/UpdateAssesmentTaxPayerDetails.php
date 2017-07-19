@@ -1,7 +1,6 @@
 <?php
 	require_once("access_admin.php");
 	require_once("connect_database.php");
-	$message='';
 	$id=$_GET['link'];
 	$getExistingDetailsQuery="SELECT * FROM assesment_tax_detail WHERE id='$id'";
 	$datarow=mysqli_fetch_assoc(database_query($getExistingDetailsQuery));
@@ -110,13 +109,11 @@
 <div id="PageHeading">
 <h1>Update Assesment TaxPayer Details</h1>
 </div>
-<div id="Message" >
-<h2> Provide details of the tax payer. </h2>
-<h2> Fill all the data correctly. </h2>
-</div>
+
+
 <div id="Detail">
+<h2> Provide details of the tax payer for update! </h2>
 <h3><?php if(isset($_POST['update'])){echo $message;}?></h3>
-<h2 class="DetailHeader2"> Assement tax payer apply form. </h2>
 
 <form  method="post" id="AssementTaxPayerDetail">
 <table align="left" width="">

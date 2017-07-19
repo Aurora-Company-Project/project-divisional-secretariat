@@ -9,7 +9,8 @@
 			echo '<th>Owner Name</th>';
 			echo '<th>Owner Address</th>';
 			echo '<th>Shop Address</th>';
-			echo '<th>Annual Tax Value</th>';
+			echo '<th>Tender Value</th>';
+			echo '<th>Monthly Rental</th>';
 			echo '<th>Arrears</th>';
 			echo '<th>Fines</th>';
 			echo '<th></th>';
@@ -40,14 +41,14 @@
 		} 
 		else 
 		{
-			$message="There's no such customer" ;
+			echo "<h3>There's no such customer</h3>" ; ;
 		}
 		echo '</table>';
 		return;
 	}
 	?>
 <?php 
-	require_once("access_officer.php");
+	//require_once("access_officer.php");
 	include("connect_database.php");
 	$confirmation=0;
 	if (isset($_POST['search'])) 
@@ -79,6 +80,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/Search.css"rel="stylesheet" type="text/css" />
 <title>Search</title>
 </head>
 <body>
@@ -91,8 +93,9 @@
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
-            		<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
-                	<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Shop Tax </a> </li>
+            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
+                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
+                    <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
                 </ul>
                 </div>
             </li>
@@ -132,12 +135,9 @@
 		</ul>
 	</nav>
 </div>
-<div>
 <div id="Content">
 <div id="PageHeading">
 <h1>Shop Rental Tax Payer Details</h1>
-</div>
-<div id="Message">
 </div>
 <div id="Detail">
 <h3><?php if(isset($_POST['search'])){echo $message;}?></h3>

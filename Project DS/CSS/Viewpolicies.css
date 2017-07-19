@@ -1,14 +1,99 @@
 @charset "utf-8";
 /* CSS Document */
-.link {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 200%;
+h3 {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#F00;
+	margin-left:65px;
+	font-size:16px;
+}
+	
+
+#PageHeading{
+	margin-top:10px;
+	height:auto;
+	margin-bottom:10px;
+	background-color:rgba(243,243,246,0.5);
+	border-radius:2%;
 }
 
-.Rates {
-	font-family: Arial, Helvetica, sans-serif;
-	color:blueviolet;
-	padding: 10px 10px;
+h1 {
+	font-family:"Bodoni MT";
+	color:#006;
+	font-weight:500;
+	font-size:40px;
+	text-align:center;
+	re0201.3
+
+	font-weight:100px;
 }
 
+#Detail h2 {
+	font-family:"Bernard MT Condensed", serif;
+	color:#009;
+	font-weight:lighter;
+	font-size:20px;
+	margin-left:10px;
+	padding-bottom:12px;
+	font-weight:300;
+}
 
+#Message {
+	width:300px;
+	float:left;
+	border:thin;
+	border-color:#00F;
+}
+
+#Detail {
+	margin-top:200px;
+	width:890px;
+	float:center;
+	background: rgba(130,130,130,0.5);
+	border-radius:1%;
+	position: relative;
+	height:500px;
+	margin:auto;
+}
+#Detail #DetailHeader {
+	padding-left:55px;
+}
+
+a {
+	color:#09F;
+}
+li{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:18px;
+	color:#003;
+	font-weight:300;
+}
+button{
+	border-radius:6px;
+	background-color: rgba(102,102,255,0.5);
+
+	box-shadow: 0 0 25px rgba(0,0,0,0.1),inset 0 0 6px rgba(69,69,69,0.6);
+  	width: 200px;
+  	border: 1px solid;
+  	border-bottom-color: rgba(255,255,255,.5);
+  	border-right-color: rgba(60,60,60,.35);
+  	border-top-color: rgba(60,60,60,.35);
+  	border-left-color: rgba(80,80,80,.45);
+  	background-repeat: no-repeat;
+  	font-family:Arial, Helvetica, sans-serif;
+  	letter-spacing: .075em;
+  	color:#000;
+  	text-shadow: 0 1px 0 rgba(0,0,0,.1);
+	float:right;
+	padding:2px 2px;
+	height:50px;
+	margin-right:50px;
+	
+}
+p{
+	padding:20px 20px;
+	font-size:25px;
+	font-family:"Baskerville Old Face";
+}
+button:hover{
+	color:#999;
+}

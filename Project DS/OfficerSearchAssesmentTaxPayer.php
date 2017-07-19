@@ -44,7 +44,7 @@
 	} 
 		else 
 		{
-			$message="There's no such customer" ;
+			echo "<h3>There's no such customer</h3>" ; ;
 		}
 		echo '</table>';
 		return;
@@ -67,7 +67,7 @@
 		$customerNameAndLaneQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND lane='$lane'";
 		$assesmentNoAndCustomerNameQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND assesment_no='$assesmentNumber'";
 		$assesmentNoLaneAndCustomerNameQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND assesment_no='$assesmentNumber' AND lane='$lane'";
-		if((!(is_numeric($assesmentNumber))&& !empty($assesmentNumber)) || ((is_numeric($customerName))&& !empty($customerName) ))
+		if((!(is_numeric($assesmentNumber))&& !empty($assesmentNumber))|| ((is_numeric($customerName))&& !empty($customerName) ))
 		{
 			$message="Enter Valid Details";
 		}
@@ -79,6 +79,7 @@
 		{	
 			$confirmation=1;
 		}
+	
 	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -87,6 +88,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="CSS/LayoutHome.css" rel="stylesheet" type="text/css" />
 <link href="CSS/Menu.css" rel="stylesheet" type="text/css" />
+<link href="CSS/Search.css" rel="stylesheet" type="text/css" />
 <title>Search</title>
 </head>
 <body>
@@ -99,8 +101,9 @@
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
-            		<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
-                	<li> <a href="AccountOfficer.php? <?php echo SID;?>"> Shop Tax </a> </li>
+            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
+                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
+                    <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
                 </ul>
                 </div>
             </li>
@@ -140,13 +143,11 @@
 		</ul>
 	</nav>
 </div>
-<div>
 <div id="Content">
 <div id="PageHeading">
 <h1>Assesment Tax Payer Details</h1>
 </div>
-<div id="Message">
-</div>
+
 <div id="Detail">
 	<h3><?php if(isset($_POST['search'])){echo $message;}?></h3>
 	<form action="OfficerSearchAssesmentTaxPayer.php" id="detail_form" name="detailForm" method="POST">
@@ -184,7 +185,7 @@
     <button type='submit' name='search'>Search</button>
     </form>
     <?php
-		if ($confirmatio==1)
+		if ($confirmation==1)
 		{
 			if(!empty($assesmentNumber)&& ($lane=='none') && empty($customerName))
 			{

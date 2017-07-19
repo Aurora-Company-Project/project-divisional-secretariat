@@ -1,0 +1,82 @@
+@charset "utf-8";
+/* CSS Document */
+form{
+  position: relative;
+  width: 400px;
+  margin:auto;
+  background: rgba(130,130,130,.3);
+  padding: 20px 22px;
+  border: 1px solid;
+  border-top-color: rgba(255,255,255,.4);
+  border-left-color: rgba(255,255,255,.4);
+  border-bottom-color: rgba(60,60,60,.4);
+  border-right-color: rgba(60,60,60,.4);
+  height:200px;
+  margin-top:200px;
+
+}
+button{
+	border-radius:6px;
+	background-color: rgba(102,102,255,0.5);
+
+	box-shadow: 0 0 25px rgba(0,0,0,0.1),inset 0 0 6px rgba(69,69,69,0.6);
+  	width: 200px;
+  	border: 1px solid;
+  	border-bottom-color: rgba(255,255,255,.5);
+  	border-right-color: rgba(60,60,60,.35);
+  	border-top-color: rgba(60,60,60,.35);
+  	border-left-color: rgba(80,80,80,.45);
+  	background-repeat: no-repeat;
+  	font-family:Arial, Helvetica, sans-serif;
+  	letter-spacing: .075em;
+  	color:#000;
+  	text-shadow: 0 1px 0 rgba(0,0,0,.1);
+	float:right;
+	padding:2px 2px;
+	height:50px;
+	margin-top:40px;
+	margin-right:50px;
+	
+}
+#PageHeading{
+	margin-top:10px;
+	height:auto;
+	margin-bottom:10px;
+	background-color:rgba(243,243,246,0.5);
+	border-radius:2%;
+}
+h1 {
+	font-family:"Bodoni MT";
+	color:#006;
+	font-weight:500;
+	font-size:40px;
+	text-align:center;
+	re0201.3
+
+	font-weight:100px;
+}
+label{
+	font-size:20px;
+	font-weight:300;
+	
+}
+button:hover{
+	color:#999;
+}
+input,select{
+	border-radius:5px;
+	background-color:#CCC;
+	padding:2px;
+}
+tabel{
+	width:900px;
+	height:auto;
+}
+th{
+	text-align:center;
+}
+h3{
+	text-align:center;
+	font-size:25px;
+	color:#F00;
+}
