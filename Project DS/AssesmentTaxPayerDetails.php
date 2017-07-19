@@ -71,7 +71,7 @@
 		$customerNameAndLaneQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND lane='$lane'";
 		$assesmentNoAndCustomerNameQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND assesment_no='$assesmentNumber'";
 		$assesmentNoLaneAndCustomerNameQuery="SELECT * FROM assesment_tax_detail WHERE owner_name='$customerName' AND assesment_no='$assesmentNumber' AND lane='$lane'";
-		if((!(is_numeric($assesmentNumber))&& !empty($assesmentNumber)) || ($assesmentNumber<=0)|| ((is_numeric($customerName))&& !empty($customerName) ))
+		if((!(is_numeric($assesmentNumber))&& !empty($assesmentNumber))|| ((is_numeric($customerName))&& !empty($customerName) ))
 		{
 			$message="Enter Valid Details";
 		}

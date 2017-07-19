@@ -48,7 +48,7 @@
 	}
 	?>
 <?php 
-	//require_once("access_officer.php");
+	require_once("access_officer.php");
 	include("connect_database.php");
 	$confirmation=0;
 	if (isset($_POST['search'])) 

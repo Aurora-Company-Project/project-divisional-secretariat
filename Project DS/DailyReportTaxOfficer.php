@@ -1,5 +1,5 @@
 <?php
-	//require_once("access_officer.php");
+	require_once("access_officer.php");
 	$i=0;
 	$bool=false;
 	if(isset($_POST['generate'])){

@@ -2,7 +2,6 @@
 	require_once("access_admin.php");
 	$i=0;
 	$amount=0;
-	include 'connection.php';
 	$message='';
 	$bool=false;
 	if (isset($_POST['getcustom'])){	

@@ -1,9 +1,8 @@
 <?php
-	require_once("access_officer.php");
-	require('connect_database.php');
+		require_once("access_officer.php");
 		$id = $_GET['link'];
 		
-		require_once('connect_database.php');
+		include('connect_database.php');
 		$query= "select * FROM assesment_tax_detail WHERE id= '$id'";
 		$detail = mysqli_fetch_array(database_query($query));
 		
@@ -82,8 +81,8 @@
 			<li class="DropDwnElmnt"> <a href="#"> Tax Payments </a> 
             	<div class="DropDwnCntnt">
                 <ul class="DrpLst">
-            		<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
-                	<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
+            		<li> <a href="OfficerSearchAssesmentTaxPayer.php? <?php echo SID;?>"> Assesment Tax </a> </li>
+                	<li> <a href="OfficerSearchShopRentalPayer.php? <?php echo SID;?>"> Shop Rental </a> </li>
                     <li> <a href="Incorrectpay.php? <?php echo SID;?>"> False Payements </a> </li>
                 </ul>
                 </div>
